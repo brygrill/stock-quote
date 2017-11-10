@@ -1,0 +1,29 @@
+{
+  "name": "stock-symbol-search",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/brygrill/stock-symbol-search.git",
+  "author": "Bryan Grill",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "babel-eslint": "^8.0.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.10",
+    "babel-preset-env": "^1.6.0",
+    "eslint": "^3.19.0 || ^4.3.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-config-prettier": "^2.4.0",
+    "eslint-plugin-class-property": "^1.0.6",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.1.0",
+    "prettier": "^1.7.4"
+  },
+  "dependencies": {
+    "csvtojson": "^1.1.9",
+    "ftp": "^0.3.10",
+    "request": "^2.83.0"
+  }
+}
