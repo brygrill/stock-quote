@@ -22,8 +22,9 @@
     "prettier": "^1.7.4"
   },
   "dependencies": {
+    "algoliasearch": "^3.24.5",
     "csvtojson": "^1.1.9",
-    "ftp": "^0.3.10",
-    "request": "^2.83.0"
+    "dotenv": "^4.0.0",
+    "ftp": "^0.3.10"
   }
 }
