@@ -1,46 +1,45 @@
 import React, { Component } from 'react';
-import {
-  Hits,
-  SearchBox,
-  Highlight,
-  Pagination,
-} from 'react-instantsearch/dom';
+import PropTypes from 'prop-types';
+import { connectAutoComplete } from 'react-instantsearch/connectors';
+import { Search, Image } from 'semantic-ui-react';
 
-const Stock = ({ hit }) => {
-  // console.log(hit);
+import searchByAlgolia from './search-by-algolia.png';
+
+const propTypes = {
+  hits: PropTypes.array.isRequired,
+  refine: PropTypes.func.isRequired,
+};
+
+const formatHits = hits => {
   return (
-    <div style={{ marginTop: '10px' }}>
-      <span className="hit-name">
-        <Highlight attributeName="Symbol" hit={hit} />
-      </span>
-    </div>
+    <Search.Result title={hits.Symbol} description={hits['Security Name']} />
   );
 };
 
-export default class Search extends Component {
+class SymbolSearch extends Component {
   state = {
     searching: false,
   };
+
   onSearchChange = event => {
     const searching = event.target.value.length;
+    this.props.refine(event.target.value);
     this.setState({ searching });
   };
+
   render() {
-    const { searching } = this.state;
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col" />
-          <div className="col-8">
-            <SearchBox onChange={this.onSearchChange} />
-            <div style={searching ? { display: 'inherit' } : { display: 'none' }}>
-              <Hits hitComponent={Stock} />
-              <Pagination />
-            </div>
-          </div>
-          <div className="col" />
-        </div>
+      <div>
+        <Search
+          onSearchChange={this.onSearchChange}
+          results={this.props.hits}
+          resultRenderer={formatHits}
+        />
+        <Image src={searchByAlgolia} />
       </div>
     );
   }
 }
+
+SymbolSearch.propTypes = propTypes;
+export default connectAutoComplete(SymbolSearch);
