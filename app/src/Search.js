@@ -8,12 +8,13 @@ import searchByAlgolia from './search-by-algolia.png';
 const propTypes = {
   hits: PropTypes.array.isRequired,
   refine: PropTypes.func.isRequired,
+  push: PropTypes.func.isRequired,
 };
 
 const formatHits = hits => {
-  return (
-    <Search.Result title={hits.Symbol} description={hits['Security Name']} />
-  );
+  return hits.map(item => {
+    return { title: item.Symbol, description: item['Security Name'] };
+  });
 };
 
 class SymbolSearch extends Component {
@@ -22,18 +23,23 @@ class SymbolSearch extends Component {
   };
 
   onSearchChange = event => {
-    const searching = event.target.value.length;
     this.props.refine(event.target.value);
-    this.setState({ searching });
+  };
+
+  onResultSelect = (event, { result }) => {
+    this.props.push({
+      pathname: `${result.title.toLowerCase()}`,
+    });
   };
 
   render() {
+    const hits = formatHits(this.props.hits);
     return (
       <div>
         <Search
           onSearchChange={this.onSearchChange}
-          results={this.props.hits}
-          resultRenderer={formatHits}
+          onResultSelect={this.onResultSelect}
+          results={hits}
         />
         <Image src={searchByAlgolia} />
       </div>
