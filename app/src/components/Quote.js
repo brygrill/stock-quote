@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
+import Search from './Search';
+
 // Init Axios
 const iex = axios.create({
   baseURL: 'https://api.iextrading.com/1.0/stock',
@@ -32,10 +34,18 @@ export default class Quote extends Component {
 
   componentDidMount() {
     this.fetchQuote(this.props.symbol);
-    this.props.setSymbol(this.props.symbol.toUpperCase());
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.symbol !== nextProps.symbol) {
+      this.fetchQuote(nextProps.symbol);
+    }
   }
 
   fetchQuote = symbol => {
+    // set parent component state
+    this.props.setSymbol(this.props.symbol.toUpperCase());
+    // fetch data from IEX
     return iex
       .get(`/${symbol}/batch`, {
         params: {
@@ -67,6 +77,7 @@ export default class Quote extends Component {
     }
     return (
       <div>
+        <Search {...this.props} />
         <h1>{this.props.symbol}</h1>
         <h2>Stock quote here</h2>
         <h2>price: ${this.props.wsLatest || this.state.restLatest}</h2>

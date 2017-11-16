@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { InstantSearch } from 'react-instantsearch/dom';
 import io from 'socket.io-client';
@@ -10,25 +9,9 @@ import Quote from './Quote';
 // Init socket.io
 const socket = io('https://ws-api.iextrading.com/1.0/tops');
 
-// Search page wrapped in Angolia InstantSearch
-const SearchPage = props => {
-  return (
-    <InstantSearch
-      appId={process.env.REACT_APP_ALGOLIA_ID}
-      apiKey={process.env.REACT_APP_ALGOLIA_API_KEY}
-      indexName={process.env.REACT_APP_ALGOLIA_INDEX}
-    >
-      <Search push={props.push} {...props} />
-    </InstantSearch>
-  );
-};
-
-SearchPage.propTypes = {
-  push: PropTypes.func.isRequired,
-};
-
 export default class RouterComponent extends Component {
   state = {
+    wsConnected: false,
     symbol: null,
     wsQuote: null,
   };
@@ -41,7 +24,7 @@ export default class RouterComponent extends Component {
   iexSocket = () => {
     // Connect to the channel
     socket.on('connect', () => {
-      console.log('connected to iex');
+      this.setState({ wsConnected: true });
       socket.emit('subscribe', 'firehose');
     });
 
@@ -54,7 +37,7 @@ export default class RouterComponent extends Component {
     });
 
     // Disconnect from the channel
-    socket.on('disconnect', () => console.log('Disconnected.'));
+    socket.on('disconnect', () => this.setState({ wsConnected: false }));
   };
 
   // Set active symbol on Quote cDM
@@ -64,27 +47,36 @@ export default class RouterComponent extends Component {
 
   render() {
     return (
-      <Router>
-        <div>
-          <Route
-            exact
-            path="/"
-            render={routeProps => <SearchPage push={routeProps.history.push} />}
-          />
-          <Route
-            exact
-            path="/:id"
-            render={routeProps => (
-              <Quote
-                setSymbol={this.handleSetSymbol}
-                symbol={routeProps.match.params.id}
-                wsQuote={this.state.wsQuote}
-                wsLatest={this.state.wsLatest}
-              />
-            )}
-          />
-        </div>
-      </Router>
+      <InstantSearch
+        appId={process.env.REACT_APP_ALGOLIA_ID}
+        apiKey={process.env.REACT_APP_ALGOLIA_API_KEY}
+        indexName={process.env.REACT_APP_ALGOLIA_INDEX}
+      >
+        <Router>
+          <div>
+            <Route
+              exact
+              path="/"
+              render={props => (
+                <Search {...props} />
+              )}
+            />
+            <Route
+              exact
+              path="/:id"
+              render={props => (
+                <Quote
+                  setSymbol={this.handleSetSymbol}
+                  symbol={props.match.params.id}
+                  wsQuote={this.state.wsQuote}
+                  wsLatest={this.state.wsLatest}
+                  {...props}
+                />
+              )}
+            />
+          </div>
+        </Router>
+      </InstantSearch>
     );
   }
 }
