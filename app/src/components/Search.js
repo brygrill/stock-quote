@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connectAutoComplete } from 'react-instantsearch/connectors';
 import { Search, Image } from 'semantic-ui-react';
 
-import searchByAlgolia from './search-by-algolia.png';
+import searchByAlgolia from '../images/search-by-algolia.png';
 
 const propTypes = {
   hits: PropTypes.array.isRequired,
@@ -18,10 +18,6 @@ const formatHits = hits => {
 };
 
 class SymbolSearch extends Component {
-  state = {
-    searching: false,
-  };
-
   onSearchChange = event => {
     this.props.refine(event.target.value);
   };
@@ -48,4 +44,5 @@ class SymbolSearch extends Component {
 }
 
 SymbolSearch.propTypes = propTypes;
+
 export default connectAutoComplete(SymbolSearch);
