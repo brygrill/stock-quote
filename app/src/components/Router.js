@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { InstantSearch } from 'react-instantsearch/dom';
 import io from 'socket.io-client';
 
@@ -54,13 +54,8 @@ export default class RouterComponent extends Component {
       >
         <Router>
           <div>
-            <Route
-              exact
-              path="/"
-              render={props => (
-                <Search {...props} />
-              )}
-            />
+            <Link to="/">Home</Link>
+            <Route exact path="/" render={props => <Search {...props} />} />
             <Route
               exact
               path="/:id"
