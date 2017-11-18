@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Header } from 'semantic-ui-react';
 
 import Search from './Search';
+import Stats from './Stats';
 import Chart from './Chart';
 
 // Init Axios
@@ -63,6 +64,7 @@ export default class Quote extends Component {
   fetchQuote = symbol => {
     // set parent component state
     this.props.setSymbol(symbol.toUpperCase());
+    this.setState({ loading: true });
     // fetch data from IEX
     return iex
       .get(`/${symbol}/batch`, {
@@ -90,22 +92,20 @@ export default class Quote extends Component {
   };
 
   render() {
-    if (this.state.loading) {
-      return <div>loading...</div>;
-    }
     return (
       <Grid.Column width={16}>
         <Search {...this.props} />
-        {this.state.stockFound ? (
-          <div>
-            <h1>{this.props.symbol}</h1>
-            <h2>Stock quote here</h2>
-            <h2>price: ${this.props.wsLatest || this.state.restLatest}</h2>
-            <Chart />
-
-          </div>
+        {this.state.loading ? (
+          <Header inverted content="Loading..." />
         ) : (
-          <div>Not Found!</div>
+          <Grid.Row>
+            <Stats
+              stockFound={this.state.stockFound}
+              symbol={this.props.symbol}
+              price={this.props.wsLatest || this.state.restLatest}
+            />
+            <Chart />
+          </Grid.Row>
         )}
       </Grid.Column>
     );
