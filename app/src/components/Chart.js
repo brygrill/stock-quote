@@ -1,26 +1,40 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import _ from 'lodash';
 import { XYPlot, LineSeries } from 'react-vis';
+
+const propTypes = {
+  chart: PropTypes.array,
+};
+
+const defaultProps = {
+  chart: [],
+};
+
+const setXY = data => {
+  const forChart = data.map((item, index) => {
+    return _.assign({}, item, {
+      x: index,
+      y: item.close,
+    });
+  });
+  return forChart;
+};
 
 export default class ChartComponent extends Component {
   render() {
-    const data = [
-      { x: 0, y: 8 },
-      { x: 1, y: 5 },
-      { x: 2, y: 4 },
-      { x: 3, y: 9 },
-      { x: 4, y: 1 },
-      { x: 5, y: 7 },
-      { x: 6, y: 6 },
-      { x: 7, y: 3 },
-      { x: 8, y: 2 },
-      { x: 9, y: 0 },
-    ];
+    console.log(this.props.chart);
+    const data = setXY(this.props.chart);
+    console.log(data);
     return (
-      <div className="App">
-        <XYPlot height={300} width={300}>
+      <div>
+        <XYPlot height={300} width={600}>
           <LineSeries data={data} />
         </XYPlot>
       </div>
     );
   }
 }
+
+ChartComponent.propTypes = propTypes;
+ChartComponent.defaultProps = defaultProps;

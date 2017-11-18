@@ -104,7 +104,7 @@ export default class Quote extends Component {
               symbol={this.props.symbol}
               price={this.props.wsLatest || this.state.restLatest}
             />
-            <Chart />
+            <Chart chart={this.state.chart} />
           </Grid.Row>
         )}
       </Grid.Column>

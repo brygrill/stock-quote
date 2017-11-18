@@ -46,7 +46,6 @@ export default class RouterComponent extends Component {
 
   // Set active symbol on Quote cDM
   handleSetSymbol = symbol => {
-    console.log(symbol);
     this.setState({ symbol, wsLatest: null });
   };
 
