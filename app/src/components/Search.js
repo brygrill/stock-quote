@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connectAutoComplete } from 'react-instantsearch/connectors';
-import { Search, Image } from 'semantic-ui-react';
-
-import searchByAlgolia from '../images/search-by-algolia.png';
+import { Grid, Search } from 'semantic-ui-react';
 
 const propTypes = {
   hits: PropTypes.array.isRequired,
@@ -13,7 +11,7 @@ const propTypes = {
 
 const formatHits = hits => {
   return hits.map(item => {
-    return { title: item.Symbol, description: item['Security Name'] };
+    return { title: item.symbol, description: item.name };
   });
 };
 
@@ -38,15 +36,22 @@ class SymbolSearch extends Component {
   render() {
     const hits = formatHits(this.props.hits);
     return (
-      <div>
-        <Search
-          value={this.state.searchValue}
-          onSearchChange={this.onSearchChange}
-          onResultSelect={this.onResultSelect}
-          results={hits}
-        />
-        <Image src={searchByAlgolia} />
-      </div>
+      <Grid.Row>
+        <Grid.Column width={16}>
+          <Grid.Row>
+            <Search
+              className="searchFlex"
+              fluid
+              size="large"
+              placeholder="Search by Company or Symbol"
+              value={this.state.searchValue}
+              onSearchChange={this.onSearchChange}
+              onResultSelect={this.onResultSelect}
+              results={hits.slice(0, 9)}
+            />
+          </Grid.Row>
+        </Grid.Column>
+      </Grid.Row>
     );
   }
 }

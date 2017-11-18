@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { Grid } from 'semantic-ui-react';
 
 import Search from './Search';
+import Chart from './Chart';
 
 // Init Axios
 const iex = axios.create({
@@ -30,6 +32,7 @@ export default class Quote extends Component {
     stats: null,
     restLatest: 0.0,
     error: false,
+    stockFound: true,
   };
 
   componentDidMount() {
@@ -42,9 +45,24 @@ export default class Quote extends Component {
     }
   }
 
+  onFetchError = err => {
+    if (err.response) {
+      if (err.response.status === 404) {
+        this.setState({
+          loading: false,
+          stockFound: false,
+        });
+      } else {
+        this.setState({ loading: false, error: true });
+      }
+    } else {
+      this.setState({ loading: false, error: true });
+    }
+  };
+
   fetchQuote = symbol => {
     // set parent component state
-    this.props.setSymbol(this.props.symbol.toUpperCase());
+    this.props.setSymbol(symbol.toUpperCase());
     // fetch data from IEX
     return iex
       .get(`/${symbol}/batch`, {
@@ -57,6 +75,7 @@ export default class Quote extends Component {
       .then(({ data }) => {
         this.setState({
           loading: false,
+          stockFound: true,
           quote: data.quote,
           chart: data.chart,
           dividends: data.dividends,
@@ -66,8 +85,7 @@ export default class Quote extends Component {
         });
       })
       .catch(err => {
-        this.setState({ loading: false, error: true });
-        console.error(err);
+        this.onFetchError(err);
       });
   };
 
@@ -76,12 +94,20 @@ export default class Quote extends Component {
       return <div>loading...</div>;
     }
     return (
-      <div>
+      <Grid.Column width={16}>
         <Search {...this.props} />
-        <h1>{this.props.symbol}</h1>
-        <h2>Stock quote here</h2>
-        <h2>price: ${this.props.wsLatest || this.state.restLatest}</h2>
-      </div>
+        {this.state.stockFound ? (
+          <div>
+            <h1>{this.props.symbol}</h1>
+            <h2>Stock quote here</h2>
+            <h2>price: ${this.props.wsLatest || this.state.restLatest}</h2>
+            <Chart />
+
+          </div>
+        ) : (
+          <div>Not Found!</div>
+        )}
+      </Grid.Column>
     );
   }
 }

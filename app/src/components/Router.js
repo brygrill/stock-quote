@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { InstantSearch } from 'react-instantsearch/dom';
+import { Container, Grid } from 'semantic-ui-react';
 import io from 'socket.io-client';
 
 import Search from './Search';
 import Quote from './Quote';
+import NotFound from './NotFound';
+import Menu from './Menu';
 
 // Init socket.io
 const socket = io('https://ws-api.iextrading.com/1.0/tops');
@@ -14,6 +17,7 @@ export default class RouterComponent extends Component {
     wsConnected: false,
     symbol: null,
     wsQuote: null,
+    wsLatest: null,
   };
 
   componentDidMount() {
@@ -42,7 +46,7 @@ export default class RouterComponent extends Component {
 
   // Set active symbol on Quote cDM
   handleSetSymbol = symbol => {
-    this.setState({ symbol });
+    this.setState({ symbol, wsLatest: null });
   };
 
   render() {
@@ -54,21 +58,32 @@ export default class RouterComponent extends Component {
       >
         <Router>
           <div>
-            <Link to="/">Home</Link>
-            <Route exact path="/" render={props => <Search {...props} />} />
-            <Route
-              exact
-              path="/:id"
-              render={props => (
-                <Quote
-                  setSymbol={this.handleSetSymbol}
-                  symbol={props.match.params.id}
-                  wsQuote={this.state.wsQuote}
-                  wsLatest={this.state.wsLatest}
-                  {...props}
-                />
-              )}
-            />
+            <Menu />
+            <Container>
+              <Grid>
+                <Switch>
+                  <Route
+                    exact
+                    path="/"
+                    render={props => <Search {...props} />}
+                  />
+                  <Route
+                    exact
+                    path="/:id"
+                    render={props => (
+                      <Quote
+                        setSymbol={this.handleSetSymbol}
+                        symbol={props.match.params.id}
+                        wsQuote={this.state.wsQuote}
+                        wsLatest={this.state.wsLatest}
+                        {...props}
+                      />
+                    )}
+                  />
+                  <Route component={NotFound} />
+                </Switch>
+              </Grid>
+            </Container>
           </div>
         </Router>
       </InstantSearch>
