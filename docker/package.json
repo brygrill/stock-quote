@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "algoliasearch": "^3.24.5",
+    "axios": "^0.17.1",
     "csvtojson": "^1.1.9",
     "dotenv": "^4.0.0",
     "ftp": "^0.3.10"
