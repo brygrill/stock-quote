@@ -46,6 +46,7 @@ export default class RouterComponent extends Component {
 
   // Set active symbol on Quote cDM
   handleSetSymbol = symbol => {
+    console.log(symbol);
     this.setState({ symbol, wsLatest: null });
   };
 
@@ -58,7 +59,7 @@ export default class RouterComponent extends Component {
       >
         <Router>
           <div>
-            <Menu />
+            <Menu symbol={this.state.symbol} toHome={this.handleSetSymbol} />
             <Container>
               <Grid>
                 <Switch>
