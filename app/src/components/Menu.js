@@ -31,6 +31,7 @@ export default class MenuComponent extends Component {
                 this.props.symbol ? { visibility: 'inherit' } : { visibility: 'hidden' }
               }
               onClick={this.toHome}
+              as="div"
             >
               <Link to="/">
                 <Icon name="home" size="large" />

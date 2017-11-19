@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Header } from 'semantic-ui-react';
+import { Header, Segment } from 'semantic-ui-react';
 
 const propTypes = {
   stockFound: PropTypes.bool.isRequired,
   symbol: PropTypes.string,
+  name: PropTypes.string,
   price: PropTypes.number,
 };
 
 const defaultProps = {
-  symbol: null,
+  symbol: '',
+  name: '',
   price: 0.00,
 };
 
@@ -17,12 +19,12 @@ export default class StatsComponent extends Component {
   render() {
     if (this.props.stockFound) {
       return (
-        <Header sub inverted>
-          <Header.Content>
+        <Segment inverted className="segBlack" >
+          <Header as="h2" inverted>
             {this.props.symbol}
-            <Header.Subheader>{this.props.price}</Header.Subheader>
-          </Header.Content>
-        </Header>
+            <Header.Subheader>{this.props.name}</Header.Subheader>
+          </Header>
+        </Segment>
       );
     }
     return (

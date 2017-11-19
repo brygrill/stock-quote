@@ -8,9 +8,13 @@ body {
 .searchFlex {
   display: flex;
   justify-content: center;
-  margin: 1rem 2rem;
+  margin: 1rem 0;
 }
 
 .search .input {
   width: 100%;
+}
+
+.segBlack {
+  background-color: #000000 !important;
 }

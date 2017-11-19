@@ -7,6 +7,11 @@ const propTypes = {
   hits: PropTypes.array.isRequired,
   refine: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
+  size: PropTypes.string,
+};
+
+const defaultProps = {
+  size: 'large',
 };
 
 const formatHits = hits => {
@@ -42,7 +47,7 @@ class SymbolSearch extends Component {
             <Search
               className="searchFlex"
               fluid
-              size="large"
+              size={this.props.size}
               placeholder="Search by Company or Symbol"
               value={this.state.searchValue}
               onSearchChange={this.onSearchChange}
@@ -57,5 +62,6 @@ class SymbolSearch extends Component {
 }
 
 SymbolSearch.propTypes = propTypes;
+SymbolSearch.defaultProps = defaultProps;
 
 export default connectAutoComplete(SymbolSearch);

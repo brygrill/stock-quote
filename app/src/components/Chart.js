@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { XYPlot, LineSeries } from 'react-vis';
+import { FlexibleWidthXYPlot, YAxis, LineSeries } from 'react-vis';
+import { Header } from 'semantic-ui-react';
 
 const propTypes = {
   chart: PropTypes.array,
@@ -23,14 +24,19 @@ const setXY = data => {
 
 export default class ChartComponent extends Component {
   render() {
-    console.log(this.props.chart);
     const data = setXY(this.props.chart);
-    console.log(data);
     return (
       <div>
-        <XYPlot height={300} width={600}>
+        <Header sub inverted textAlign="center">1 Year Chart</Header>
+        <FlexibleWidthXYPlot height={300}>
+          <YAxis
+            hideLine
+            tickFormat={v => `$${v}`}
+            width={60}
+            style={{ line: { stroke: '#000000' } }}
+          />
           <LineSeries data={data} />
-        </XYPlot>
+        </FlexibleWidthXYPlot>
       </div>
     );
   }

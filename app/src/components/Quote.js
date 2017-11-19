@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { Grid, Header } from 'semantic-ui-react';
+import { Grid, Header, Divider } from 'semantic-ui-react';
 
 import Search from './Search';
 import Stats from './Stats';
@@ -94,14 +94,16 @@ export default class Quote extends Component {
   render() {
     return (
       <Grid.Column width={16}>
-        <Search {...this.props} />
+        <Search {...this.props} size="small" />
+        <Divider inverted />
         {this.state.loading ? (
           <Header inverted content="Loading..." />
         ) : (
           <Grid.Row>
             <Stats
               stockFound={this.state.stockFound}
-              symbol={this.props.symbol}
+              symbol={this.state.quote.symbol}
+              name={this.state.quote.companyName}
               price={this.props.wsLatest || this.state.restLatest}
             />
             <Chart chart={this.state.chart} />
