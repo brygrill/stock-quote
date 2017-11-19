@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Header, Segment } from 'semantic-ui-react';
+import { Header, Segment, Statistic } from 'semantic-ui-react';
 
 const propTypes = {
   stockFound: PropTypes.bool.isRequired,
@@ -12,18 +12,24 @@ const propTypes = {
 const defaultProps = {
   symbol: '',
   name: '',
-  price: 0.00,
+  price: 0.0,
 };
 
 export default class StatsComponent extends Component {
   render() {
     if (this.props.stockFound) {
       return (
-        <Segment inverted className="segBlack" >
-          <Header as="h2" inverted>
+        <Segment inverted className="statsSeg">
+          <Header as="h2" inverted style={{ margin: 0 }}>
             {this.props.symbol}
             <Header.Subheader>{this.props.name}</Header.Subheader>
           </Header>
+          <Statistic
+            inverted
+            style={{ margin: 0 }}
+            size="small"
+            value={`$${this.props.price}`}
+          />
         </Segment>
       );
     }

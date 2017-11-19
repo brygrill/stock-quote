@@ -15,6 +15,13 @@ body {
   width: 100%;
 }
 
-.segBlack {
+.statsSeg {
+  background-color: #000000 !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chartSeg {
   background-color: #000000 !important;
 }

@@ -95,17 +95,18 @@ export default class Quote extends Component {
     return (
       <Grid.Column width={16}>
         <Search {...this.props} size="small" />
-        <Divider inverted />
         {this.state.loading ? (
           <Header inverted content="Loading..." />
         ) : (
           <Grid.Row>
+            <Divider inverted />
             <Stats
               stockFound={this.state.stockFound}
               symbol={this.state.quote.symbol}
               name={this.state.quote.companyName}
               price={this.props.wsLatest || this.state.restLatest}
             />
+            <Divider inverted />
             <Chart chart={this.state.chart} />
           </Grid.Row>
         )}

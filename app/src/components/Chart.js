@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { FlexibleWidthXYPlot, YAxis, LineSeries } from 'react-vis';
-import { Header } from 'semantic-ui-react';
+import { Header, Segment } from 'semantic-ui-react';
 
 const propTypes = {
   chart: PropTypes.array,
@@ -26,8 +26,7 @@ export default class ChartComponent extends Component {
   render() {
     const data = setXY(this.props.chart);
     return (
-      <div>
-        <Header sub inverted textAlign="center">1 Year Chart</Header>
+      <Segment inverted className="chartSeg">
         <FlexibleWidthXYPlot height={300}>
           <YAxis
             hideLine
@@ -37,7 +36,8 @@ export default class ChartComponent extends Component {
           />
           <LineSeries data={data} />
         </FlexibleWidthXYPlot>
-      </div>
+        <Header sub inverted textAlign="center" color="grey" style={{ margin: 0 }}>1 YR</Header>
+      </Segment>
     );
   }
 }
