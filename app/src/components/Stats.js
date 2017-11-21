@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Header, Segment, Statistic, Icon } from 'semantic-ui-react';
+import { Header, Segment, Popup, Icon } from 'semantic-ui-react';
 import numeral from 'numeral';
 
 const propTypes = {
@@ -20,6 +20,23 @@ const defaultProps = {
   live: false,
 };
 
+const styles = {
+  topStatsSeg: {
+    backgroundColor: '#000',
+  },
+  topStatsH2: {
+    fontWeight: 300,
+    margin: 0,
+  },
+  topStatsLabel: {
+    fontWeight: 300,
+  },
+  topStatsContent: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+};
+
 export default class StatsComponent extends Component {
   render() {
     if (this.props.stockFound) {
@@ -34,26 +51,60 @@ export default class StatsComponent extends Component {
             {this.props.symbol}
             <Header.Subheader>{this.props.name}</Header.Subheader>
           </Header>
-          <Segment inverted className="statsSeg">
-            <Statistic inverted horizontal style={{ margin: 0 }} color={this.props.changePercent >= 0 ? 'green' : 'red'}>
-              <Statistic.Label style={{fontWeight: 300, color: '#888', marginRight: '.25rem'}}>
+
+          <Segment clearing inverted style={styles.topStatsSeg}>
+            <Header
+              as="h2"
+              floated="left"
+              textAlign="left"
+              inverted
+              style={styles.topStatsH2}
+              color={this.props.changePercent >= 0 ? 'green' : 'red'}
+            >
+              <Header.Subheader style={styles.topStatsLabel}>
                 LAST
-              </Statistic.Label>
-              <Statistic.Value style={{ fontWeight: 300 }}>
+              </Header.Subheader>
+              <Header.Content style={styles.topStatsContent}>
                 {numeral(this.props.price).format('$0,0.00')}
-              </Statistic.Value>
-              <Statistic.Label>
-                <Icon
-                  name="lightning"
-                  color={this.props.live ? 'yellow' : 'black'}
-                />
-              </Statistic.Label>
-            </Statistic>
-            <Statistic inverted horizontal style={{ margin: 0 }} color={this.props.changePercent > 0 ? 'green' : 'red'}>
-              <Statistic.Value style={{ fontWeight: 300 }}>
+                <Popup
+                  inverted
+                  on="click"
+                  trigger={
+                    <Icon
+                      name="lightning"
+                      size="small"
+                      color={this.props.live ? 'yellow' : 'black'}
+                    />
+                  }
+                  style={
+                    this.props.live
+                      ? { display: 'inherit' }
+                      : { display: 'none' }
+                  }
+                >
+                  <Popup.Content>
+                    <a href="https://iextrading.com/developer/">
+                      IEX Real Time Price
+                    </a>
+                  </Popup.Content>
+                </Popup>
+              </Header.Content>
+            </Header>
+            <Header
+              as="h2"
+              floated="right"
+              textAlign="right"
+              inverted
+              style={styles.topStatsH2}
+              color={this.props.changePercent >= 0 ? 'green' : 'red'}
+            >
+              <Header.Subheader style={styles.topStatsLabel}>
+                TODAY
+              </Header.Subheader>
+              <Header.Content>
                 {numeral(this.props.changePercent).format('0.000%')}
-              </Statistic.Value>
-            </Statistic>
+              </Header.Content>
+            </Header>
           </Segment>
         </div>
       );
