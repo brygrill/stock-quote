@@ -48,7 +48,7 @@ class SymbolSearch extends Component {
               className="searchFlex"
               fluid
               size={this.props.size}
-              placeholder="Search by Company or Symbol"
+              placeholder="Enter Company or Symbol"
               value={this.state.searchValue}
               onSearchChange={this.onSearchChange}
               onResultSelect={this.onResultSelect}

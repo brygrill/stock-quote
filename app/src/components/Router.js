@@ -4,8 +4,8 @@ import { InstantSearch } from 'react-instantsearch/dom';
 import { Container, Grid } from 'semantic-ui-react';
 import io from 'socket.io-client';
 
-import Search from './Search';
-import Quote from './Quote';
+import SearchPage from './SearchPage';
+import QuotePage from './QuotePage';
 import NotFound from './NotFound';
 import Menu from './Menu';
 
@@ -65,13 +65,13 @@ export default class RouterComponent extends Component {
                   <Route
                     exact
                     path="/"
-                    render={props => <Search {...props} />}
+                    render={props => <SearchPage {...props} />}
                   />
                   <Route
                     exact
                     path="/:id"
                     render={props => (
-                      <Quote
+                      <QuotePage
                         setSymbol={this.handleSetSymbol}
                         symbol={props.match.params.id}
                         wsQuote={this.state.wsQuote}

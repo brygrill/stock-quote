@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Menu, Icon, Image } from 'semantic-ui-react';
+
+import Search from './Search';
 
 import searchByAlgolia from '../images/search-by-algolia-white.png';
 
@@ -14,30 +16,31 @@ const defaultProps = {
   symbol: null,
 };
 
-export default class MenuComponent extends Component {
+class MenuComponent extends Component {
   toHome = () => {
     // set symbol to null on click to home
-    // so home icon is not visible
+    // so home icon and search are not visible
     this.props.toHome(null);
-  }
+  };
   render() {
+    const visible = this.props.symbol
+      ? { visibility: 'inherit' }
+      : { visibility: 'hidden' };
     return (
       <div>
         {/* TOP MENU */}
-        <Menu secondary stackable icon inverted>
-          <Menu.Menu position="left">
-            <Menu.Item
-              style={
-                this.props.symbol ? { visibility: 'inherit' } : { visibility: 'hidden' }
-              }
-              onClick={this.toHome}
-              as="div"
-            >
-              <Link to="/">
-                <Icon name="home" size="large" />
-              </Link>
-            </Menu.Item>
-          </Menu.Menu>
+        <Menu secondary icon inverted style={visible}>
+          <Menu.Item
+            onClick={this.toHome}
+            as="div"
+          >
+            <Link to="/">
+              <Icon name="home" size="large" />
+            </Link>
+          </Menu.Item>
+          <Menu.Item position="right">
+            <Search {...this.props} size="small" />
+          </Menu.Item>
         </Menu>
 
         {/* BOTTOM MENU */}
@@ -59,3 +62,5 @@ export default class MenuComponent extends Component {
 
 MenuComponent.propTypes = propTypes;
 MenuComponent.defaultProps = defaultProps;
+
+export default withRouter(MenuComponent);

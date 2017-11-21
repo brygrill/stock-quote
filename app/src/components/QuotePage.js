@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Grid, Header, Divider } from 'semantic-ui-react';
 
-import Search from './Search';
 import Stats from './Stats';
 import Chart from './Chart';
 
@@ -71,7 +70,6 @@ export default class Quote extends Component {
         params: {
           types: 'quote,chart,dividends,logo,stats',
           range: '1y',
-          displayPercent: true,
         },
       })
       .then(({ data }) => {
@@ -94,17 +92,19 @@ export default class Quote extends Component {
   render() {
     return (
       <Grid.Column width={16}>
-        <Search {...this.props} size="small" />
         {this.state.loading ? (
           <Header inverted content="Loading..." />
         ) : (
           <Grid.Row>
-            <Divider inverted />
+            {/* <Divider inverted /> */}
             <Stats
               stockFound={this.state.stockFound}
               symbol={this.state.quote.symbol}
               name={this.state.quote.companyName}
               price={this.props.wsLatest || this.state.restLatest}
+              change={this.state.quote.change}
+              changePercent={this.state.quote.changePercent}
+              live={this.props.wsLatest}
             />
             <Divider inverted />
             <Chart chart={this.state.chart} />
