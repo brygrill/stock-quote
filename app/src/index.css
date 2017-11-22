@@ -16,6 +16,11 @@ body {
   width: 100%;
 }
 
+.searchSeg {
+  background-color: #000000 !important;
+  padding: 6rem 0 !important;
+}
+
 .statsSeg {
   background-color: #000000 !important;
   display: flex;

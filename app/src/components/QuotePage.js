@@ -6,6 +6,7 @@ import { Grid, Header, Divider } from 'semantic-ui-react';
 import PriceStats from './PriceStats';
 import DataStats from './DataStats';
 import Chart from './Chart';
+import Disclaimer from './Disclaimer';
 
 // Init Axios
 const iex = axios.create({
@@ -111,6 +112,7 @@ export default class Quote extends Component {
             <DataStats />
             <Divider inverted />
             <Chart chart={this.state.chart} />
+            <Disclaimer />
           </Grid.Row>
         )}
       </Grid.Column>
