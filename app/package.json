@@ -27,6 +27,7 @@
     "react": "^16.1.0",
     "react-dom": "^16.1.0",
     "react-instantsearch": "^4.2.0",
+    "react-media": "^1.6.1",
     "react-router-dom": "^4.2.2",
     "react-vis": "^1.7.10",
     "semantic-ui-react": "^0.76.0",
