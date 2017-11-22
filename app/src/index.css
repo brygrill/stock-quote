@@ -37,6 +37,11 @@ body {
   justify-content: space-between;
 }
 
+.listDataLabel {
+  font-weight: 300;
+  color: #535757;
+}
+
 .chartSeg {
   background-color: #000000 !important;
 }
