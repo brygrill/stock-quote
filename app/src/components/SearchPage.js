@@ -8,9 +8,7 @@ export default class SearchPage extends Component {
     return (
       <Grid.Row>
         <Grid.Column width={16}>
-          <Grid.Row>
-            <Search {...this.props} />
-          </Grid.Row>
+          <Search {...this.props} />
         </Grid.Column>
       </Grid.Row>
     );

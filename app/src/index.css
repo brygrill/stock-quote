@@ -7,7 +7,8 @@ body {
 
 .searchFlex {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  align-items: center;
   margin: 1rem 0;
 }
 
@@ -22,6 +23,21 @@ body {
   align-items: center;
 }
 
+.tableSeg {
+  background-color: #000000 !important;
+}
 .chartSeg {
   background-color: #000000 !important;
+}
+
+.disclaimer {
+  font-size: 0.85rem;
+  color: #535757;
+  margin-bottom: -1rem;
+  margin-right: -0.5rem;
+}
+
+.disclaimer a {
+  color: #535757;
+  text-decoration: underline;
 }

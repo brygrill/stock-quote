@@ -40,8 +40,10 @@ const styles = {
 export default class StatsComponent extends Component {
   render() {
     if (this.props.stockFound) {
+      const up = this.props.changePercent >= 0;
       return (
         <div>
+          {/* SYMBOL */}
           <Header
             as="h2"
             inverted
@@ -52,6 +54,7 @@ export default class StatsComponent extends Component {
             <Header.Subheader>{this.props.name}</Header.Subheader>
           </Header>
 
+          {/* PRICE */}
           <Segment clearing inverted style={styles.topStatsSeg}>
             <Header
               as="h2"
@@ -59,7 +62,7 @@ export default class StatsComponent extends Component {
               textAlign="left"
               inverted
               style={styles.topStatsH2}
-              color={this.props.changePercent >= 0 ? 'green' : 'red'}
+              color={up ? 'green' : 'red'}
             >
               <Header.Subheader style={styles.topStatsLabel}>
                 LAST
@@ -73,13 +76,13 @@ export default class StatsComponent extends Component {
                     <Icon
                       name="lightning"
                       size="small"
-                      color={this.props.live ? 'yellow' : 'black'}
+                      color="yellow"
+                      style={
+                        this.props.live
+                          ? { display: 'inherit' }
+                          : { display: 'none' }
+                      }
                     />
-                  }
-                  style={
-                    this.props.live
-                      ? { display: 'inherit' }
-                      : { display: 'none' }
                   }
                 >
                   <Popup.Content>
@@ -96,12 +99,17 @@ export default class StatsComponent extends Component {
               textAlign="right"
               inverted
               style={styles.topStatsH2}
-              color={this.props.changePercent >= 0 ? 'green' : 'red'}
+              color={up ? 'green' : 'red'}
             >
               <Header.Subheader style={styles.topStatsLabel}>
                 TODAY
               </Header.Subheader>
               <Header.Content>
+                <Icon
+                  name={up ? 'caret up' : 'caret down'}
+                  size="small"
+                  color={up ? 'green' : 'red'}
+                />
                 {numeral(this.props.changePercent).format('0.000%')}
               </Header.Content>
             </Header>

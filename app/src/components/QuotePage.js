@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Grid, Header, Divider } from 'semantic-ui-react';
 
 import Stats from './Stats';
+import Table from './Table';
 import Chart from './Chart';
 
 // Init Axios
@@ -106,6 +107,8 @@ export default class Quote extends Component {
               changePercent={this.state.quote.changePercent}
               live={this.props.wsLatest}
             />
+            <Divider inverted />
+            <Table />
             <Divider inverted />
             <Chart chart={this.state.chart} />
           </Grid.Row>
