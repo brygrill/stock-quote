@@ -7,7 +7,7 @@ body {
 
 .searchFlex {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   margin: 1rem 0;
 }
@@ -23,9 +23,15 @@ body {
   align-items: center;
 }
 
-.tableSeg {
+.dataStatsSeg {
   background-color: #000000 !important;
 }
+
+.listFlex {
+  display: flex;
+  justify-content: space-between;
+}
+
 .chartSeg {
   background-color: #000000 !important;
 }
@@ -33,7 +39,7 @@ body {
 .disclaimer {
   font-size: 0.85rem;
   color: #535757;
-  margin-bottom: -1rem;
+  margin-bottom: -0.5rem;
   margin-right: -0.5rem;
 }
 

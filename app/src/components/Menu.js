@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
-import { Menu, Icon } from 'semantic-ui-react';
+import Media from 'react-media';
+import { Menu, Popup, Icon } from 'semantic-ui-react';
 
 import Search from './Search';
 
@@ -12,6 +13,23 @@ const propTypes = {
 
 const defaultProps = {
   symbol: null,
+};
+
+const Disclaimer = () => {
+  return (
+    <div className="disclaimer">
+      <span>
+        Data provided for free by{' '}
+        <a href="https://iextrading.com/developer/">IEX</a> |{' '}
+      </span>
+      <span>
+        <a href="https://iextrading.com/api-exhibit-a/">IEX Disclaimer</a> |{' '}
+      </span>
+      <span>
+        Search by <a href="https://www.algolia.com/">Algolia</a>
+      </span>
+    </div>
+  );
 };
 
 class MenuComponent extends Component {
@@ -41,19 +59,27 @@ class MenuComponent extends Component {
         {/* BOTTOM MENU */}
         <Menu secondary inverted fixed="bottom">
           <Menu.Menu position="right">
-            {/* <Menu.Item link>
-              <Image
-                src={searchByAlgolia}
-                size="small"
-                href="https://www.algolia.com/"
-              />
-            </Menu.Item> */}
-            <Menu.Item>
-              <div className="disclaimer">
-                <span>Data provided for free by <a href="https://iextrading.com/developer/">IEX</a> | </span>
-                <span><a href="https://iextrading.com/api-exhitib-a">IEX Disclaimer</a> | </span>
-                <span>Search by <a href="https://www.algolia.com/">Algolia</a></span>
-              </div>
+            <Menu.Item icon style={{ padding: '1rem' }}>
+              {/* Show icon popup with disclaimer on mobile */}
+              <Media query={{ maxWidth: 737 }}>
+                {matches =>
+                  matches ? (
+                    <Popup
+                      inverted
+                      on="click"
+                      trigger={
+                        <Icon name="info circle" size="large" color="grey" />
+                      }
+                    >
+                      <Popup.Content>
+                        <Disclaimer />
+                      </Popup.Content>
+                    </Popup>
+                  ) : (
+                    <Disclaimer />
+                  )
+                }
+              </Media>
             </Menu.Item>
           </Menu.Menu>
         </Menu>

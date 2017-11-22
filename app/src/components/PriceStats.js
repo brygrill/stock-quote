@@ -30,6 +30,7 @@ const styles = {
   },
   topStatsLabel: {
     fontWeight: 300,
+    color: '#535757',
   },
   topStatsContent: {
     display: 'flex',

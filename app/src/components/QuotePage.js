@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Grid, Header, Divider } from 'semantic-ui-react';
 
-import Stats from './Stats';
-import Table from './Table';
+import PriceStats from './PriceStats';
+import DataStats from './DataStats';
 import Chart from './Chart';
 
 // Init Axios
@@ -98,7 +98,7 @@ export default class Quote extends Component {
         ) : (
           <Grid.Row>
             {/* <Divider inverted /> */}
-            <Stats
+            <PriceStats
               stockFound={this.state.stockFound}
               symbol={this.state.quote.symbol}
               name={this.state.quote.companyName}
@@ -108,7 +108,7 @@ export default class Quote extends Component {
               live={this.props.wsLatest}
             />
             <Divider inverted />
-            <Table />
+            <DataStats />
             <Divider inverted />
             <Chart chart={this.state.chart} />
           </Grid.Row>
