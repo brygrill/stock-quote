@@ -26,6 +26,7 @@
     "arrow-parens": "off",
     "import/no-dynamic-require": "off",
     "arrow-body-style": "off",
+    "no-confusing-arrow": "off",
     "react/jsx-filename-extension": "off",
     "react/prefer-stateless-function": "off",
     "react/forbid-prop-types": "off"
