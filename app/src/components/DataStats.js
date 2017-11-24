@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Segment, Header, List, Grid } from 'semantic-ui-react';
+import { formatPrice, formatPercent, formatMktCap } from '../helpers';
 
+// Stat content
 const Content = props => {
   return (
     <List.Content className="listFlex">
@@ -12,12 +14,28 @@ const Content = props => {
 };
 
 Content.propTypes = {
-  label: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
+  label: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
-export default class TableComponent extends Component {
+// Stat Component
+const propTypes = {
+  week52low: PropTypes.number.isRequired,
+  week52high: PropTypes.number.isRequired,
+  week52change: PropTypes.number.isRequired,
+  marketCap: PropTypes.number.isRequired,
+  peRatio: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  dividendYield: PropTypes.number,
+};
+
+const defaultProps = {
+  peRatio: null,
+  dividendYield: 0,
+};
+
+export default class DataStats extends Component {
   render() {
+    const { week52low, week52high, week52change, marketCap, peRatio, dividendYield } = this.props;
     return (
       <Segment inverted padded className="dataStatsSeg">
         <Header
@@ -33,65 +51,26 @@ export default class TableComponent extends Component {
             <Grid.Column width={8}>
               <List divided inverted verticalAlign="middle">
                 <List.Item>
-                  <Content label="52 Wk Low" value={120.34} />
+                  <Content label="52 Wk Low" value={formatPrice(week52low)} />
                 </List.Item>
                 <List.Item>
-                  <List.Content className="listFlex">
-                    <div>Label</div>
-                    <div>Value</div>
-                  </List.Content>
+                  <Content label="52 Wk High" value={formatPrice(week52high)} />
                 </List.Item>
                 <List.Item>
-                  <List.Content className="listFlex">
-                    <div>Label</div>
-                    <div>Value</div>
-                  </List.Content>
-                </List.Item>
-                <List.Item>
-                  <List.Content className="listFlex">
-                    <div>Label</div>
-                    <div>Value</div>
-                  </List.Content>
-                </List.Item>
-                <List.Item>
-                  <List.Content className="listFlex">
-                    <div>Label</div>
-                    <div>Value</div>
-                  </List.Content>
+                  <Content label="52 Wk Change" value={formatPercent(week52change)} />
                 </List.Item>
               </List>
             </Grid.Column>
             <Grid.Column width={8}>
               <List divided inverted verticalAlign="middle">
                 <List.Item>
-                  <List.Content className="listFlex">
-                    <div>Label</div>
-                    <div>Value</div>
-                  </List.Content>
+                  <Content label="Market Cap" value={formatMktCap(marketCap)} />
                 </List.Item>
                 <List.Item>
-                  <List.Content className="listFlex">
-                    <div>Label</div>
-                    <div>Value</div>
-                  </List.Content>
+                  <Content label="P/E Ratio" value={peRatio || 'N/A'} />
                 </List.Item>
                 <List.Item>
-                  <List.Content className="listFlex">
-                    <div>Label</div>
-                    <div>Value</div>
-                  </List.Content>
-                </List.Item>
-                <List.Item>
-                  <List.Content className="listFlex">
-                    <div>Label</div>
-                    <div>Value</div>
-                  </List.Content>
-                </List.Item>
-                <List.Item>
-                  <List.Content className="listFlex">
-                    <div>Label</div>
-                    <div>Value</div>
-                  </List.Content>
+                  <Content label="Dividend Yield" value={formatPercent(dividendYield)} />
                 </List.Item>
               </List>
             </Grid.Column>
@@ -101,3 +80,6 @@ export default class TableComponent extends Component {
     );
   }
 }
+
+DataStats.propTypes = propTypes;
+DataStats.defaultProps = defaultProps;

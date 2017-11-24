@@ -6,12 +6,8 @@ import { Grid, Header, Divider } from 'semantic-ui-react';
 import PriceStats from './PriceStats';
 import DataStats from './DataStats';
 import Chart from './Chart';
+import VictoryChart from './VictoryChart';
 import Disclaimer from './Disclaimer';
-
-// Init Axios
-const iex = axios.create({
-  baseURL: 'https://api.iextrading.com/1.0/stock',
-});
 
 const propTypes = {
   symbol: PropTypes.string.isRequired,
@@ -22,6 +18,15 @@ const propTypes = {
 const defaultProps = {
   wsQuote: null,
   wsLatest: null,
+};
+
+// Init Axios
+const iex = axios.create({
+  baseURL: 'https://api.iextrading.com/1.0/stock',
+});
+
+const calcPercCh = (close, last) => {
+  return (last - close) / close;
 };
 
 export default class Quote extends Component {
@@ -105,13 +110,26 @@ export default class Quote extends Component {
               name={this.state.quote.companyName}
               price={this.props.wsLatest || this.state.restLatest}
               change={this.state.quote.change}
-              changePercent={this.state.quote.changePercent}
+              changePercent={
+                this.props.wsLatest
+                  ? calcPercCh(this.state.quote.close, this.props.wsLatest)
+                  : this.state.quote.changePercent
+              }
               live={this.props.wsLatest}
             />
             <Divider inverted />
-            <DataStats />
+            <DataStats
+              week52low={this.state.stats.week52low}
+              week52high={this.state.stats.week52high}
+              week52change={this.state.stats.week52change / 100}
+              marketCap={this.state.stats.marketcap}
+              peRatio={this.state.quote.peRatio}
+              dividendYield={this.state.stats.dividendYield / 100}
+            />
             <Divider inverted />
-            <Chart chart={this.state.chart} />
+            {/* <Chart chart={this.state.chart} /> */}
+            <Divider inverted />
+            <VictoryChart chart={this.state.chart} />
             <Disclaimer />
           </Grid.Row>
         )}

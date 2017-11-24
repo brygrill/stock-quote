@@ -14,12 +14,15 @@ const defaultProps = {
 
 const setXY = data => {
   const forChart = data.map((item, index) => {
-    return _.assign({}, item, {
-      x: index,
-      y: item.close,
-    });
+    if (item.average > 0) {
+      return _.assign({}, item, {
+        x: index,
+        y: item.close,
+      });
+    }
+    return null;
   });
-  return forChart;
+  return _.compact(forChart);
 };
 
 export default class ChartComponent extends Component {

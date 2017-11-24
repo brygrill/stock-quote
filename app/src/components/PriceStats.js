@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Header, Segment, Popup, Icon } from 'semantic-ui-react';
-import numeral from 'numeral';
+import { formatPrice, formatPercent } from '../helpers';
 
 const propTypes = {
   stockFound: PropTypes.bool.isRequired,
@@ -69,7 +69,7 @@ export default class StatsComponent extends Component {
                 LAST
               </Header.Subheader>
               <Header.Content style={styles.topStatsContent}>
-                {numeral(this.props.price).format('$0,0.00')}
+                {formatPrice(this.props.price)}
                 <Popup
                   inverted
                   on="click"
@@ -80,7 +80,7 @@ export default class StatsComponent extends Component {
                       color="yellow"
                       style={
                         this.props.live
-                          ? { display: 'inherit' }
+                          ? {}
                           : { display: 'none' }
                       }
                     />
@@ -111,7 +111,7 @@ export default class StatsComponent extends Component {
                   size="small"
                   color={up ? 'green' : 'red'}
                 />
-                {numeral(this.props.changePercent).format('0.000%')}
+                {formatPercent(this.props.changePercent)}
               </Header.Content>
             </Header>
           </Segment>
