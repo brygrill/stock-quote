@@ -12,6 +12,10 @@ export const formatNumber = num => {
   return numeral(num).format('0.00a');
 };
 
-export const formatMktCap = cap => {
-  return numeral(cap).format('($ 0.00 a)');
+export const formatBigPrice = cap => {
+  return numeral(cap).format('($0.00 a)');
+};
+
+export const formatBigPriceNoDecimal = cap => {
+  return numeral(cap).format('($0a)');
 };

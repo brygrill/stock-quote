@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Segment, Header, List, Grid } from 'semantic-ui-react';
-import { formatPrice, formatPercent, formatMktCap } from '../helpers';
+import { formatPrice, formatPercent, formatBigPrice } from '../helpers';
 
 // Stat content
 const Content = props => {
@@ -64,7 +64,7 @@ export default class DataStats extends Component {
             <Grid.Column width={8}>
               <List divided inverted verticalAlign="middle">
                 <List.Item>
-                  <Content label="Market Cap" value={formatMktCap(marketCap)} />
+                  <Content label="Market Cap" value={formatBigPrice(marketCap)} />
                 </List.Item>
                 <List.Item>
                   <Content label="P/E Ratio" value={peRatio || 'N/A'} />

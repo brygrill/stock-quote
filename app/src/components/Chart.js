@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Segment, Header } from 'semantic-ui-react';
 import {
   ResponsiveContainer,
-  ComposedChart,
+  LineChart,
   XAxis,
   YAxis,
   Tooltip,
-  Bar,
   Line,
 } from 'recharts';
+
+import { formatBigPriceNoDecimal } from '../helpers';
 
 const propTypes = {
   chart: PropTypes.array,
@@ -62,38 +64,46 @@ const defaultProps = {
 class ChartComponent extends Component {
   render() {
     return (
-      <ResponsiveContainer height={500}>
-        <ComposedChart
-          data={this.props.chart}
-          margin={{ top: 5, right: 30, left: 30, bottom: 5 }}
+      <Segment inverted padded className="chartSeg">
+        <Header
+          as="h2"
+          inverted
+          textAlign="center"
+          style={{ fontWeight: 300, color: '#535757' }}
         >
-          <XAxis dataKey="label" />
-          <YAxis
-            dataKey="close"
-            type="number"
-            yAxisId="left"
-            orientation="left"
-            domain={['auto', 'auto']}
-          />
-          <YAxis
-            dataKey="volume"
-            type="number"
-            domain={['auto', 'auto']}
-            yAxisId="right"
-            orientation="right"
-            height={200}
-          />
-          <Tooltip />
-          <Bar dataKey="volume" fill="#82ca9d" yAxisId="right" />
-          <Line
-            type="monotone"
-            dataKey="close"
-            stroke="#8884d8"
-            dot={false}
-            yAxisId="left"
-          />
-        </ComposedChart>
-      </ResponsiveContainer>
+          CHART
+        </Header>
+        <ResponsiveContainer height={400}>
+          <LineChart
+            data={this.props.chart}
+            margin={{ top: 0, right: 0, left: 0, bottom: -75 }}
+          >
+            <XAxis hide height={0} />
+            <YAxis
+              dataKey="close"
+              type="number"
+              yAxisId="left"
+              orientation="left"
+              width={50}
+              domain={['auto', 'auto']}
+              axisLine={false}
+              tickLine={false}
+              tick={{ stroke: '#535757', fontWeight: 'lighter' }}
+              tickFormatter={t =>
+                t < 10000 ? `$${t}` : formatBigPriceNoDecimal(t)
+              }
+            />
+            <Tooltip />
+            <Line
+              type="monotone"
+              dataKey="close"
+              stroke="#4B77BE"
+              dot={false}
+              yAxisId="left"
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </Segment>
     );
   }
 }
