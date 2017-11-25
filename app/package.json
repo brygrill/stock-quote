@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
-    "d3-scale": "^1.0.7",
     "lodash": "^4.17.4",
     "numeral": "^2.0.6",
     "prop-types": "^15.6.0",
@@ -30,12 +29,9 @@
     "react-instantsearch": "^4.2.0",
     "react-media": "^1.6.1",
     "react-router-dom": "^4.2.2",
-    "react-stockcharts": "^0.7.0-beta.19",
-    "react-vis": "^1.7.10",
     "recharts": "^1.0.0-beta.5",
     "semantic-ui-react": "^0.76.0",
-    "socket.io-client": "^2.0.4",
-    "victory": "^0.24.2"
+    "socket.io-client": "^2.0.4"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -5,7 +5,7 @@ import { Grid, Header, Divider } from 'semantic-ui-react';
 
 import PriceStats from './PriceStats';
 import DataStats from './DataStats';
-import StockChart2 from './StockChart2';
+import Chart from './Chart';
 import Disclaimer from './Disclaimer';
 
 const propTypes = {
@@ -126,7 +126,7 @@ export default class Quote extends Component {
               dividendYield={this.state.stats.dividendYield / 100}
             />
             <Divider inverted />
-            <StockChart2 chart={this.state.chart} />
+            <Chart chart={this.state.chart} />
             <Disclaimer />
           </Grid.Row>
         )}

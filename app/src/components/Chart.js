@@ -1,49 +1,104 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
-import { FlexibleWidthXYPlot, YAxis, LineSeries } from 'react-vis';
-import { Header, Segment } from 'semantic-ui-react';
+import {
+  ResponsiveContainer,
+  ComposedChart,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Bar,
+  Line,
+} from 'recharts';
 
 const propTypes = {
   chart: PropTypes.array,
 };
 
 const defaultProps = {
-  chart: [],
+  chart: [
+    {
+      date: '2010-01-03T05:00:00.000Z',
+      open: 25.436282332605284,
+      high: 25.835021381744056,
+      low: 25.411360259406774,
+      close: 25.710416,
+      volume: 38409100,
+      split: '',
+      dividend: '',
+    },
+    {
+      date: '2010-01-04T05:00:00.000Z',
+      open: 25.436282332605284,
+      high: 25.835021381744056,
+      low: 25.411360259406774,
+      close: 25.710416,
+      volume: 38409100,
+      split: '',
+      dividend: '',
+    },
+    {
+      date: '2010-01-05T05:00:00.000Z',
+      open: 25.436282332605284,
+      high: 25.835021381744056,
+      low: 25.411360259406774,
+      close: 26.710416,
+      volume: 38409100,
+      split: '',
+      dividend: '',
+    },
+    {
+      date: '2010-01-06T05:00:00.000Z',
+      open: 25.436282332605284,
+      high: 25.835021381744056,
+      low: 25.411360259406774,
+      close: 27.710416,
+      volume: 38409100,
+      split: '',
+      dividend: '',
+    },
+  ],
 };
 
-const setXY = data => {
-  const forChart = data.map((item, index) => {
-    if (item.average > 0) {
-      return _.assign({}, item, {
-        x: index,
-        y: item.close,
-      });
-    }
-    return null;
-  });
-  return _.compact(forChart);
-};
-
-export default class ChartComponent extends Component {
+class ChartComponent extends Component {
   render() {
-    const data = setXY(this.props.chart);
     return (
-      <Segment inverted className="chartSeg">
-        <FlexibleWidthXYPlot height={300}>
+      <ResponsiveContainer height={500}>
+        <ComposedChart
+          data={this.props.chart}
+          margin={{ top: 5, right: 30, left: 30, bottom: 5 }}
+        >
+          <XAxis dataKey="label" />
           <YAxis
-            hideLine
-            tickFormat={v => `$${v}`}
-            width={60}
-            style={{ line: { stroke: '#000000' } }}
+            dataKey="close"
+            type="number"
+            yAxisId="left"
+            orientation="left"
+            domain={['auto', 'auto']}
           />
-          <LineSeries data={data} />
-        </FlexibleWidthXYPlot>
-        <Header sub inverted textAlign="center" color="grey" style={{ margin: 0 }}>1 YR</Header>
-      </Segment>
+          <YAxis
+            dataKey="volume"
+            type="number"
+            domain={['auto', 'auto']}
+            yAxisId="right"
+            orientation="right"
+            height={200}
+          />
+          <Tooltip />
+          <Bar dataKey="volume" fill="#82ca9d" yAxisId="right" />
+          <Line
+            type="monotone"
+            dataKey="close"
+            stroke="#8884d8"
+            dot={false}
+            yAxisId="left"
+          />
+        </ComposedChart>
+      </ResponsiveContainer>
     );
   }
 }
 
 ChartComponent.propTypes = propTypes;
 ChartComponent.defaultProps = defaultProps;
+
+export default ChartComponent;
