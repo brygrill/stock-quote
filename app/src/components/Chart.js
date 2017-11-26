@@ -10,6 +10,8 @@ import {
   Line,
 } from 'recharts';
 
+import ChartTooltip from './ChartTooltip';
+
 import { formatBigPriceNoDecimal } from '../helpers';
 
 const propTypes = {
@@ -17,48 +19,7 @@ const propTypes = {
 };
 
 const defaultProps = {
-  chart: [
-    {
-      date: '2010-01-03T05:00:00.000Z',
-      open: 25.436282332605284,
-      high: 25.835021381744056,
-      low: 25.411360259406774,
-      close: 25.710416,
-      volume: 38409100,
-      split: '',
-      dividend: '',
-    },
-    {
-      date: '2010-01-04T05:00:00.000Z',
-      open: 25.436282332605284,
-      high: 25.835021381744056,
-      low: 25.411360259406774,
-      close: 25.710416,
-      volume: 38409100,
-      split: '',
-      dividend: '',
-    },
-    {
-      date: '2010-01-05T05:00:00.000Z',
-      open: 25.436282332605284,
-      high: 25.835021381744056,
-      low: 25.411360259406774,
-      close: 26.710416,
-      volume: 38409100,
-      split: '',
-      dividend: '',
-    },
-    {
-      date: '2010-01-06T05:00:00.000Z',
-      open: 25.436282332605284,
-      high: 25.835021381744056,
-      low: 25.411360259406774,
-      close: 27.710416,
-      volume: 38409100,
-      split: '',
-      dividend: '',
-    },
-  ],
+  chart: [],
 };
 
 class ChartComponent extends Component {
@@ -93,7 +54,7 @@ class ChartComponent extends Component {
                 t < 10000 ? `$${t}` : formatBigPriceNoDecimal(t)
               }
             />
-            <Tooltip />
+            <Tooltip content={<ChartTooltip data={this.props.chart} />} />
             <Line
               type="monotone"
               dataKey="close"
