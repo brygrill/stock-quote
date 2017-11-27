@@ -1,6 +1,6 @@
-# stock-symbol-search
+# stock-quote
 
-Script to pull listed stock symbols from NASDAQ, convert to JSON and push into Algolia.
+Search for and get real-time quotes.
 
-- ftp://ftp.nasdaqtrader.com/SymbolDirectory
-- http://www.nasdaqtrader.com/trader.aspx?id=symboldirdefs
+- Search by [Algolia](https://www.algolia.com/)
+- Data provided for free by [IEX](https://iextrading.com/developer/)
