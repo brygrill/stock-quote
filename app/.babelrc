@@ -1,0 +1,15 @@
+{
+  "env": {
+    "development": {
+      "presets": []
+    },
+    "production": {
+      "presets": [],
+      "plugins": ["transform-react-remove-prop-types"]
+    },
+    "test": {
+      "presets": ["env"]
+    }
+  },
+  "plugins": ["transform-class-properties", "transform-object-rest-spread"]
+}
