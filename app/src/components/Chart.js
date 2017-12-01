@@ -32,7 +32,7 @@ class ChartComponent extends Component {
           textAlign="center"
           style={{ fontWeight: 300, color: '#535757' }}
         >
-          CHART
+          1YR CHART
         </Header>
         <ResponsiveContainer height={400}>
           <LineChart

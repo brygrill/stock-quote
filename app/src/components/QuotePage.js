@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Grid, Header, Divider } from 'semantic-ui-react';
 
+import Helmet from './Helmet';
 import PriceStats from './PriceStats';
 import DataStats from './DataStats';
 import Chart from './Chart';
 import Disclaimer from './Disclaimer';
+
+import { calcPercCh } from '../helpers';
 
 const propTypes = {
   symbol: PropTypes.string.isRequired,
@@ -23,10 +26,6 @@ const defaultProps = {
 const iex = axios.create({
   baseURL: 'https://api.iextrading.com/1.0/stock',
 });
-
-const calcPercCh = (close, last) => {
-  return (last - close) / close;
-};
 
 export default class Quote extends Component {
   state = {
@@ -102,7 +101,10 @@ export default class Quote extends Component {
           <Header inverted content="Loading..." />
         ) : (
           <Grid.Row>
-            {/* <Divider inverted /> */}
+            <Helmet
+              symbol={this.state.quote.symbol}
+              price={this.props.wsLatest || this.state.restLatest}
+            />
             <PriceStats
               stockFound={this.state.stockFound}
               symbol={this.state.quote.symbol}

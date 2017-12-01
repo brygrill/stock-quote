@@ -19,3 +19,7 @@ export const formatBigPrice = cap => {
 export const formatBigPriceNoDecimal = cap => {
   return numeral(cap).format('($0a)');
 };
+
+export const calcPercCh = (close, last) => {
+  return (last - close) / close;
+};
