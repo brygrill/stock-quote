@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-require('dotenv').config();
 const axios = require('axios');
 const algoliasearch = require('algoliasearch');
 
