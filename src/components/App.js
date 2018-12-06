@@ -1,13 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        search
-      </div>
-    );
-  }
-}
+import ErrorBoundary from './ErrorBoundary';
+import Layout from '../layout';
+import Router from '../routes';
+
+const App = () => {
+  return (
+    <ErrorBoundary>
+      <Layout>
+        <Router />
+      </Layout>
+    </ErrorBoundary>
+  );
+};
 
 export default App;
