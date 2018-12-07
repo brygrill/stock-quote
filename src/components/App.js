@@ -1,15 +1,18 @@
 import React from 'react';
 
 import ErrorBoundary from './ErrorBoundary';
+import { SocketProvider } from './WithSocketContext';
 import Layout from '../layout';
 import Router from '../routes';
 
 const App = () => {
   return (
     <ErrorBoundary>
-      <Layout>
-        <Router />
-      </Layout>
+      <SocketProvider>
+        <Layout>
+          <Router />
+        </Layout>
+      </SocketProvider>
     </ErrorBoundary>
   );
 };

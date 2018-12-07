@@ -1,11 +1,9 @@
 import React from 'react';
+import { withSocketContext } from '../components/WithSocketContext';
 
 const HomePage = props => {
-  return (
-    <div>
-      search
-    </div>
-  );
+  console.log(props);
+  return <div>search</div>;
 };
 
-export default HomePage;
+export default withSocketContext()(HomePage);
