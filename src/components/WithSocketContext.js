@@ -6,7 +6,7 @@ import { fetchQuoteData, fetchIndiciesData } from '../utils/fetch';
 
 const socket = io('https://ws-api.iextrading.com/1.0/tops');
 
-const indiciesCollection = ['SPY', 'QQQ'];
+const indiciesCollection = ['SPY', 'QQQ', 'DIA', 'TLT', 'VXX'];
 
 export const SocketContext = React.createContext();
 

@@ -15,12 +15,19 @@ export const fetchQuoteData = async symbol => {
   return data;
 };
 
+export const fetchBatchData = async symbols => {
+  const { data } = await iex.get(`/market/batch`, {
+    params: {
+      symbols,
+      types: 'quote,chart',
+      range: '1y',
+    },
+  });
+  return data;
+};
+
 export const fetchIndiciesData = async symbols => {
-  const quotes = await axios.all(
-    _.map(symbols, async s => {
-      return await fetchQuoteData(s);
-    }),
-  );
+  const quotes = await fetchBatchData(_.toString(symbols));
 
   return quotes;
 };
