@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 
 import HomePage from './HomePage';
 import QuotePage from './QuotePage';
@@ -7,7 +7,7 @@ import NotFoundPage from './NotFoundPage';
 
 const Router = props => {
   return (
-    <BrowserRouter>
+    <div>
       <Switch>
         <Route exact path="/" render={props => <HomePage {...props} />} />
         <Route
@@ -19,7 +19,7 @@ const Router = props => {
         />
         <Route component={NotFoundPage} />
       </Switch>
-    </BrowserRouter>
+    </div>
   );
 };
 
