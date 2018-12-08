@@ -27,7 +27,7 @@ export const SocketProvider = props => {
   const [quoteData, setQuoteData] = useState(null);
 
   const [indiciesLast, setIndiciesLast] = useState([]);
-  const [indiciesData, setIndiciesData] = useState([]);
+  const [indiciesData, setIndiciesData] = useState({});
 
   const ws = () => {
     try {
