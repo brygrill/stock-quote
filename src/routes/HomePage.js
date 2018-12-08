@@ -8,7 +8,8 @@ const HomePage = props => {
   if (props.fetching.loading) {
     return <div>loading...</div>;
   }
-  return <Header last={props.indiciesLast} quotes={props.indiciesData} />;
+  return <div>home</div>;
 };
 
 export default withSocketContext()(HomePage);
+

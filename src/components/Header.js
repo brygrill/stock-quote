@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { withSocketContext } from '../components/WithSocketContext';
 
 const Header = props => {
   console.log(props);
@@ -11,9 +11,4 @@ const Header = props => {
   );
 };
 
-Header.propTypes = {
-  last: PropTypes.array.isRequired,
-  quotes: PropTypes.object.isRequired,
-};
-
-export default Header;
+export default withSocketContext()(Header);
