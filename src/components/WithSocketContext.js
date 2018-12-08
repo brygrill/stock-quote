@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import io from 'socket.io-client';
+import Loading from './Loading';
 import { fetchQuoteData, fetchIndiciesData } from '../utils/fetch';
 
 const socket = io('https://ws-api.iextrading.com/1.0/tops');
@@ -16,7 +17,12 @@ export const SocketProvider = props => {
     error: null,
   });
 
-  const [fetching, setFetching] = useState({
+  const [fetchingIncidies, setFetchingIndicies] = useState({
+    loading: true,
+    error: null,
+  });
+
+  const [fetchingQuote, setFetchingQuote] = useState({
     loading: true,
     error: null,
   });
@@ -62,21 +68,21 @@ export const SocketProvider = props => {
     try {
       const data = await fetchIndiciesData(indiciesCollection);
       setIndiciesData(data);
-      setFetching({ loading: false, error: null });
+      setFetchingIndicies({ loading: false, error: null });
     } catch (error) {
-      setFetching({ loading: false, error });
+      setFetchingIndicies({ loading: false, error });
     }
   };
 
   const handleSymbolChange = async symbol => {
     try {
-      setFetching({ loading: true, error: null });
+      setFetchingQuote({ loading: true, error: null });
       const data = await fetchQuoteData(symbol);
       setSymbol(symbol);
       setQuoteData(data);
-      setFetching({ loading: false, error: null });
+      setFetchingQuote({ loading: false, error: null });
     } catch (error) {
-      setFetching({ loading: false, error });
+      setFetchingQuote({ loading: false, error });
     }
   };
 
@@ -89,7 +95,8 @@ export const SocketProvider = props => {
     <SocketContext.Provider
       value={{
         session,
-        fetching,
+        fetchingIncidies,
+        fetchingQuote,
         symbol,
         quoteLast,
         quoteData,
@@ -116,7 +123,13 @@ export const withSocketContext = () => ReactComp => {
   const WithSocketContext = props => {
     return (
       <SocketContext.Consumer>
-        {context => <ReactComp {...context} {...props} />}
+        {context =>
+          context.fetchingIncidies.loading ? (
+            <Loading />
+          ) : (
+            <ReactComp {...context} {...props} />
+          )
+        }
       </SocketContext.Consumer>
     );
   };
