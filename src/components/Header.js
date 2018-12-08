@@ -1,10 +1,11 @@
 import React from 'react';
+import SearchInput from './SearchInput';
 import { withSocketContext } from '../components/WithSocketContext';
 
 const Header = props => {
   return (
     <div>
-      <div>search</div>
+      <SearchInput />
       <div>market data</div>
     </div>
   );
