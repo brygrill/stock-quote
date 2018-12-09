@@ -5,9 +5,9 @@ import { Card } from 'semantic-ui-react';
 
 import QuoteCard from './QuoteCard';
 
-const HeadlineQuotes = ({quotes, media}) => {
+const HeadlineQuotes = ({quotes}) => {
   return (
-    <Card.Group centered itemsPerRow={media ? null : 5}>
+    <Card.Group centered stackable itemsPerRow={5}>
       {_.map(quotes, (q, i) => {
         return <QuoteCard key={i} quote={q.quote} />;
       })}
@@ -17,7 +17,6 @@ const HeadlineQuotes = ({quotes, media}) => {
 
 HeadlineQuotes.propTypes = {
   quotes: PropTypes.object.isRequired,
-  media: PropTypes.bool.isRequired,
 };
 
 export default HeadlineQuotes;
