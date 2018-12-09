@@ -1,8 +1,9 @@
 import React from 'react';
+import HeadlineNews from '../components/HeadlineNews';
 import { withSocketContext } from '../components/WithSocketContext';
 
 const HomePage = props => {
-  return <div>top movers and news</div>;
+  return <HeadlineNews />;
 };
 
 export default withSocketContext()(HomePage);
