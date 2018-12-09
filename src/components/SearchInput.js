@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { connectAutoComplete } from 'react-instantsearch-dom';
-import { withRouter } from "react-router";
+import { withRouter } from 'react-router';
 import { Search } from 'semantic-ui-react';
 
 const formatHits = hits => {
@@ -22,7 +22,7 @@ const SearchInput = props => {
     props.refine(value);
   };
 
-  const onSelect = (e, {result}) => {
+  const onSelect = (e, { result }) => {
     setVal('');
     props.history.push({
       pathname: `${result.title.toLowerCase()}`,
@@ -32,6 +32,8 @@ const SearchInput = props => {
   return (
     <Search
       fluid
+      input={{ style: { width: '90%' } }}
+      size="small"
       placeholder="Enter Company or Symbol"
       value={val}
       onSearchChange={onChange}
