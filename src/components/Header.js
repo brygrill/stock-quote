@@ -1,12 +1,17 @@
 import React from 'react';
 import { Segment } from 'semantic-ui-react';
 import Media from 'react-media';
+import { withRouter } from 'react-router';
 import SearchInput from './SearchInput';
 import HeadlineQuotes from './HeadlineQuotes';
 import { withSocketContext } from '../components/WithSocketContext';
 
 const Header = props => {
-  console.log(props);
+  const push = symbol => {
+    props.history.push({
+      pathname: `${symbol.toLowerCase()}`,
+    });
+  };
   return (
     <div>
       <Media query="(max-width: 599px)">
@@ -16,7 +21,12 @@ const Header = props => {
               <SearchInput />
             </Segment>
             <Segment basic>
-              <HeadlineQuotes quotes={props.indiciesData} media={matches}/>
+              <HeadlineQuotes
+                quotes={props.indiciesData}
+                socket={props.indiciesLast}
+                push={push}
+                media={matches}
+              />
             </Segment>
           </React.Fragment>
         )}
@@ -25,4 +35,4 @@ const Header = props => {
   );
 };
 
-export default withSocketContext()(Header);
+export default withSocketContext()(withRouter(Header));

@@ -5,11 +5,21 @@ import { Card } from 'semantic-ui-react';
 
 import QuoteCard from './QuoteCard';
 
-const HeadlineQuotes = ({quotes}) => {
+const HeadlineQuotes = ({ quotes, socket, push }) => {
   return (
     <Card.Group centered stackable itemsPerRow={5}>
       {_.map(quotes, (q, i) => {
-        return <QuoteCard key={i} quote={q.quote} />;
+        const { quote } = q;
+        return (
+          <QuoteCard
+            key={i}
+            symbol={quote.symbol}
+            name={quote.companyName}
+            close={quote.close}
+            last={socket[quote.symbol] || quote.latestPrice}
+            push={push}
+          />
+        );
       })}
     </Card.Group>
   );
@@ -17,6 +27,8 @@ const HeadlineQuotes = ({quotes}) => {
 
 HeadlineQuotes.propTypes = {
   quotes: PropTypes.object.isRequired,
+  socket: PropTypes.object.isRequired,
+  push: PropTypes.func.isRequired,
 };
 
 export default HeadlineQuotes;

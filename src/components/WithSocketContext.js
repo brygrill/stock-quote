@@ -7,7 +7,7 @@ import { fetchQuoteData, fetchIndiciesData } from '../utils/fetch';
 
 const socket = io('https://ws-api.iextrading.com/1.0/tops');
 
-const indiciesCollection = ['SPY', 'QQQ', 'DIA', 'TLT', 'VXX'];
+const indiciesCollection = ['SPY', 'QQQ', 'TLT', 'VXX'];
 
 export const SocketContext = React.createContext();
 
@@ -32,7 +32,7 @@ export const SocketProvider = props => {
   const [quoteLast, setQuoteLast] = useState(null);
   const [quoteData, setQuoteData] = useState(null);
 
-  const [indiciesLast, setIndiciesLast] = useState([]);
+  const [indiciesLast, setIndiciesLast] = useState({});
   const [indiciesData, setIndiciesData] = useState({});
 
   const ws = () => {
@@ -42,6 +42,18 @@ export const SocketProvider = props => {
         socket.emit('subscribe', 'firehose');
       });
 
+      socket.on('connect_error', error => {
+        setSession({ connected: false, error });
+      });
+
+      socket.on('connect_timeout', timeout => {
+        setSession({ connected: false, error: timeout });
+      });
+
+      socket.on('error', error => {
+        setSession({ connected: false, error });
+      });
+
       socket.on('disconnect', () => {
         setSession({ connected: false, error: null });
       });
@@ -49,18 +61,23 @@ export const SocketProvider = props => {
       socket.on('message', message => {
         const parse = JSON.parse(message);
         if (_.includes(indiciesCollection, parse.symbol)) {
-          console.log(parse);
-          // TODO: dont lose previous state
-          console.log(indiciesLast);
-          setIndiciesLast([...indiciesLast, parse]);
+          onMsg(parse, 'incidies');
         }
 
         if (parse.symbol === symbol) {
-          setQuoteLast(parse);
+          onMsg(parse, 'symbol');
         }
       });
     } catch (error) {
       setSession({ connected: false, error });
+    }
+  };
+
+  const onMsg = (msg, func) => {
+    if (func === 'incidies') {
+      setIndiciesLast({ [msg.symbol]: msg.lastSalePrice });
+    } else {
+      setQuoteLast(msg.lastSalePrice);
     }
   };
 

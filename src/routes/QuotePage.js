@@ -4,7 +4,6 @@ import Loading from '../components/Loading';
 import { withSocketContext } from '../components/WithSocketContext';
 
 const QuotePage = props => {
-  console.log(props);
 
   useEffect(() => {
     props.handleSymbolChange(props.symbol);

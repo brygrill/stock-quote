@@ -1,11 +1,11 @@
 import numeral from 'numeral';
 
-export const formatPrice = price => {
+export const price = price => {
   return numeral(price).format('$0,0.00');
 };
 
-export const formatPercent = percent => {
-  return numeral(percent).format('0.00%');
+export const percent = percent => {
+  return numeral(percent).format('+0.00%');
 };
 
 export const formatNumber = num => {
@@ -20,6 +20,16 @@ export const formatBigPriceNoDecimal = cap => {
   return numeral(cap).format('($0a)');
 };
 
+export const color = num => {
+  if (num > 0) {
+    return 'green';
+  } else if (num < 0) {
+    return 'red';
+  }
+  return 'black';
+};
+
 export const calcPercCh = (close, last) => {
-  return (last - close) / close;
+  const num = (last - close) / close;
+  return { num, perc: percent(num), color: color(num) };
 };
