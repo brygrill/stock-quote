@@ -14,7 +14,7 @@ const Header = props => {
   };
   return (
     <div>
-      <Media query="(max-width: 599px)">
+      <Media query="(max-width: 768px)">
         {matches => (
           <React.Fragment>
             <Segment basic textAlign="center" style={{ margin: '0 0 -1rem 0' }}>
