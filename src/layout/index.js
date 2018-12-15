@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 
 const Layout = ({children}) => {
   return (
-    <Container>
+    <Container className="page-wrap">
       <Header />
       <div>{children}</div>
       <Footer />

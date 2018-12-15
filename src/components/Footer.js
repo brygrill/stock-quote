@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { withSocketContext } from '../components/WithSocketContext';
 import Disclaimer from './Disclaimer';
 
-const FixedBottom = styled.div`
+const FixedBottom = styled.footer`
   position: fixed;
   bottom: 0;
   left: 0;
