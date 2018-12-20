@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Loading from '../components/Loading';
-import { withSocketContext } from '../components/WithSocketContext';
+import { SocketContext } from '../components/WithSocketContext';
 
 const QuotePage = props => {
-
+  const context = useContext(SocketContext);
   useEffect(() => {
-    props.handleSymbolChange(props.symbol);
+    context.handleSymbolChange(props.symbol);
   }, []);
 
-  if (props.fetchingQuote.loading) {
+  if (context.fetchingQuote.loading) {
     return <Loading page={false} />;
   }
   return <div>{props.symbol}</div>;
@@ -17,7 +17,6 @@ const QuotePage = props => {
 
 QuotePage.propTypes = {
   symbol: PropTypes.string.isRequired,
-  handleSymbolChange: PropTypes.func.isRequired,
 };
 
-export default withSocketContext()(QuotePage);
+export default QuotePage;

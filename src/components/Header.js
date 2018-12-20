@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Segment } from 'semantic-ui-react';
 import Media from 'react-media';
 import { withRouter } from 'react-router';
 import SearchInput from './SearchInput';
 import HeadlineQuotes from './HeadlineQuotes';
-import { withSocketContext } from '../components/WithSocketContext';
+import { SocketContext } from '../components/WithSocketContext';
 
 const Header = props => {
+  const context = useContext(SocketContext);
   const push = symbol => {
     props.history.push({
       pathname: `${symbol.toLowerCase()}`,
@@ -22,8 +23,8 @@ const Header = props => {
             </Segment>
             <Segment basic>
               <HeadlineQuotes
-                quotes={props.indiciesData}
-                socket={props.indiciesLast}
+                quotes={context.indiciesData}
+                socket={context.indiciesLast}
                 push={push}
                 media={matches}
               />
@@ -35,4 +36,4 @@ const Header = props => {
   );
 };
 
-export default withSocketContext()(withRouter(Header));
+export default withRouter(Header);

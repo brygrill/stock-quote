@@ -123,6 +123,7 @@ export const SocketProvider = props => {
         ...props,
       }}
     >
+      {fetchingIncidies.loading && <Loading />}
       {props.children}
     </SocketContext.Provider>
   );
@@ -134,22 +135,4 @@ SocketProvider.propTypes = {
 
 SocketProvider.defaultProps = {
   children: null,
-};
-
-export const withSocketContext = () => ReactComp => {
-  const WithSocketContext = props => {
-    return (
-      <SocketContext.Consumer>
-        {context =>
-          context.fetchingIncidies.loading ? (
-            <Loading />
-          ) : (
-            <ReactComp {...context} {...props} />
-          )
-        }
-      </SocketContext.Consumer>
-    );
-  };
-
-  return WithSocketContext;
 };

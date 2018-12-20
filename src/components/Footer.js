@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { withSocketContext } from '../components/WithSocketContext';
+import { SocketContext } from '../components/WithSocketContext';
 import Disclaimer from './Disclaimer';
 
 const FixedBottom = styled.footer`
@@ -12,7 +12,8 @@ const FixedBottom = styled.footer`
   padding: 0.25rem 0.5rem;
 `;
 
-const Footer = ({ session }) => {
+const Footer = () => {
+  const { session } = useContext(SocketContext);
   return (
     <FixedBottom>
       <Disclaimer session={session.connected} />
@@ -30,4 +31,4 @@ Footer.defaultProps = {
   },
 };
 
-export default withSocketContext()(Footer);
+export default Footer;
