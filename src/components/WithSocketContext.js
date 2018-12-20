@@ -95,8 +95,8 @@ export const SocketProvider = props => {
     try {
       setFetchingQuote({ loading: true, error: null });
       const data = await fetchQuoteData(symbol);
-      setSymbol(symbol);
       setQuoteData(data);
+      setSymbol(symbol);
       setFetchingQuote({ loading: false, error: null });
     } catch (error) {
       setFetchingQuote({ loading: false, error });

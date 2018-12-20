@@ -1,18 +1,27 @@
 import React, { useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
-import Loading from '../components/Loading';
+import QuoteData from '../components/QuoteData';
 import { SocketContext } from '../components/WithSocketContext';
 
 const QuotePage = props => {
-  const context = useContext(SocketContext);
-  useEffect(() => {
-    context.handleSymbolChange(props.symbol);
-  }, []);
+  const { symbol, fetchingQuote, handleSymbolChange, quoteData } = useContext(
+    SocketContext,
+  );
 
-  if (context.fetchingQuote.loading) {
-    return <Loading page={false} />;
-  }
-  return <div>{props.symbol}</div>;
+  useEffect(
+    () => {
+      handleSymbolChange(props.symbol);
+    },
+    [props.symbol, symbol],
+  );
+
+  return (
+    <QuoteData
+      loading={fetchingQuote.loading}
+      symbol={symbol}
+      data={quoteData}
+    />
+  );
 };
 
 QuotePage.propTypes = {
