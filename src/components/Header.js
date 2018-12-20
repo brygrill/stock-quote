@@ -4,10 +4,10 @@ import Media from 'react-media';
 import { withRouter } from 'react-router';
 import SearchInput from './SearchInput';
 import HeadlineQuotes from './HeadlineQuotes';
-import { SocketContext } from '../components/WithSocketContext';
+import { DataContext } from '../components/WithDataContext';
 
 const Header = props => {
-  const context = useContext(SocketContext);
+  const context = useContext(DataContext);
   const push = symbol => {
     props.history.push({
       pathname: `${symbol.toLowerCase()}`,
@@ -24,7 +24,6 @@ const Header = props => {
             <Segment basic>
               <HeadlineQuotes
                 quotes={context.indiciesData}
-                socket={context.indiciesLast}
                 push={push}
                 media={matches}
               />

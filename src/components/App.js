@@ -3,7 +3,7 @@ import React from 'react';
 import ErrorBoundary from './ErrorBoundary';
 import { BrowserRouter } from 'react-router-dom';
 import WithInstantSearch from './WithInstantSearch';
-import { SocketProvider } from './WithSocketContext';
+import { DataProvider } from './WithDataContext';
 import Layout from '../layout';
 import Router from '../routes';
 
@@ -12,11 +12,11 @@ const App = () => {
     <ErrorBoundary>
       <BrowserRouter>
         <WithInstantSearch>
-          <SocketProvider>
+          <DataProvider>
             <Layout>
               <Router />
             </Layout>
-          </SocketProvider>
+          </DataProvider>
         </WithInstantSearch>
       </BrowserRouter>
     </ErrorBoundary>

@@ -1,8 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { SocketContext } from '../components/WithSocketContext';
 import Disclaimer from './Disclaimer';
 
 const FixedBottom = styled.footer`
@@ -13,10 +12,9 @@ const FixedBottom = styled.footer`
 `;
 
 const Footer = () => {
-  const { session } = useContext(SocketContext);
   return (
     <FixedBottom>
-      <Disclaimer session={session.connected} />
+      <Disclaimer session={false} />
     </FixedBottom>
   );
 };

@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import {Segment, Header} from 'semantic-ui-react'
 
 const QuoteData = props => {
-  console.log(props.data)
+  if (!props.loading) {
+    console.log(props.data.quote.latestPrice)
+  }
+
   return (
     <Segment loading={props.loading}>
       <Header>
@@ -14,9 +17,15 @@ const QuoteData = props => {
 };
 
 QuoteData.propTypes = {
-  loading: PropTypes.bool.isRequired,
-  symbol: PropTypes.string.isRequired,
-  data: PropTypes.object.isRequired
+  loading: PropTypes.bool,
+  symbol: PropTypes.string,
+  data: PropTypes.object
 };
+
+QuoteData.defaultProps = {
+  loading: true,
+  symbol: null,
+  data: {}
+}
 
 export default QuoteData;
