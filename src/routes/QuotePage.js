@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import QuoteData from '../components/QuoteData';
+import { Segment } from 'semantic-ui-react';
 import { DataContext } from '../components/WithDataContext';
 
 const QuotePage = props => {
@@ -18,11 +19,9 @@ const QuotePage = props => {
   );
 
   return (
-    <QuoteData
-      loading={fetchingQuote.loading}
-      symbol={symbol}
-      data={quoteData}
-    />
+    <Segment loading={fetchingQuote.loading}>
+      <QuoteData symbol={symbol} data={quoteData} />
+    </Segment>
   );
 };
 
