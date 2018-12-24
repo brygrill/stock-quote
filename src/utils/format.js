@@ -5,6 +5,10 @@ export const price = price => {
   return numeral(price).format('$0,0.00');
 };
 
+export const priceSimple = price => {
+  return numeral(price).format('0,0.00');
+};
+
 export const percent = percent => {
   return numeral(percent).format('+0.00%');
 };
@@ -44,7 +48,9 @@ export const quoteFormatting = quote => {
     symbol: upper(quote.symbol),
     companyName: quote.companyName,
     latestPrice: price(quote.latestPrice),
+    latestPriceSimple: priceSimple(quote.latestPrice),
     change: price(quote.change),
     changePercent: percent(quote.changePercent),
+    status: color(quote.change),
   };
 };

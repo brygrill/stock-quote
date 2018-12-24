@@ -1,23 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Statistic} from 'semantic-ui-react';
+import styled from 'styled-components';
+import { Statistic } from 'semantic-ui-react';
 
-const Stats = ({ last, change, percent }) => {
+const StatWrap = styled.div`
+  @media (min-width: 768px) {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+`;
+
+const ChangeWrap = styled.div`
+  @media (max-width: 768px) {
+    margin-top: 0.5rem;
+  }
+`;
+
+const Dollar = styled.span`
+  font-size: 2rem;
+`
+
+const Stats = ({ last, change, percent, color }) => {
   return (
-    <Statistic.Group>
-      <Statistic>
-        <Statistic.Value>{last}</Statistic.Value>
-        <Statistic.Label>Last</Statistic.Label>
+    <StatWrap>
+      <Statistic style={{ marginBottom: 0 }}>
+        <Statistic.Value><Dollar>$</Dollar>{last}</Statistic.Value>
       </Statistic>
-      <Statistic>
-        <Statistic.Value>{change}</Statistic.Value>
-        <Statistic.Label>Change</Statistic.Label>
-      </Statistic>
-      <Statistic>
-        <Statistic.Value>{percent}</Statistic.Value>
-        <Statistic.Label>Percent</Statistic.Label>
-      </Statistic>
-    </Statistic.Group>
+      <ChangeWrap>
+        <Statistic size="mini" color={color} style={{ marginBottom: 0 }}>
+          <Statistic.Value>{change}</Statistic.Value>
+        </Statistic>
+        <Statistic size="mini" color={color} style={{ marginBottom: 0 }}>
+          <Statistic.Value>{percent}</Statistic.Value>
+        </Statistic>
+      </ChangeWrap>
+    </StatWrap>
   );
 };
 

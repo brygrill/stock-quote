@@ -22,9 +22,10 @@ const QuoteData = props => {
           <Header.Subheader>{display.companyName}</Header.Subheader>
         </Header>
         <Stats
-          last={display.latestPrice}
+          last={display.latestPriceSimple}
           change={display.change}
           percent={display.changePercent}
+          color={display.status}
         />
       </div>
     );
