@@ -19,7 +19,7 @@ const QuotePage = props => {
   );
 
   return (
-    <Segment loading={fetchingQuote.loading}>
+    <Segment loading={fetchingQuote.loading} textAlign="center">
       <QuoteData symbol={symbol} data={quoteData} />
     </Segment>
   );

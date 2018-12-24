@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Header, Image } from 'semantic-ui-react';
+import NotFound from './NotFound';
 import { quoteFormatting } from '../utils/format';
 import setTitle from '../utils/title';
 
@@ -24,8 +25,7 @@ const QuoteData = props => {
     );
   }
 
-  // TODO: display not found component
-  return <div>not found!</div>;
+  return <NotFound />;
 };
 
 QuoteData.propTypes = {

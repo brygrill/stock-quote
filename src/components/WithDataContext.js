@@ -72,7 +72,6 @@ export const DataProvider = props => {
       }, INTERVAL)
       setRefresh(interval)
     } catch (error) {
-      console.log('ERROR!!!!')
       setFetchingQuote({ loading: false, error });
     }
   };
