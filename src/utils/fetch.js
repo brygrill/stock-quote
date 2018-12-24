@@ -8,7 +8,7 @@ const iex = axios.create({
 export const fetchQuoteData = async symbol => {
   const { data } = await iex.get(`/${symbol}/batch`, {
     params: {
-      types: 'quote,chart,dividends,logo,stats',
+      types: 'quote,chart,dividends,logo,stats,news',
       range: '1y',
     },
   });
