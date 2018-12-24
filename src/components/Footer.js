@@ -5,10 +5,9 @@ import styled from 'styled-components';
 import Disclaimer from './Disclaimer';
 
 const FixedBottom = styled.footer`
-  position: fixed;
   bottom: 0;
   left: 0;
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 0;
 `;
 
 const Footer = () => {
