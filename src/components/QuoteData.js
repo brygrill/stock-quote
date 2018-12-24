@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Header, Image } from 'semantic-ui-react';
 import Stats from './Stats';
 import NotFound from './NotFound';
 import { quoteFormatting } from '../utils/format';
 import setTitle from '../utils/title';
+import placeholder from '../assets/iex-logo.png';
 
 const QuoteData = props => {
   if (props.data) {
@@ -12,11 +13,20 @@ const QuoteData = props => {
     const { quote, logo } = props.data;
     const display = quoteFormatting(quote);
     setTitle(display.symbol, display.latestPrice);
-    // console.log(display);
+
+    // set img
+    const [imgSrc, setImgSrc] = useState(logo.url);
+    useEffect(() => {
+      setImgSrc(logo.url);
+    }, [logo.url]);
+
+    const handleErr = e => {
+      setImgSrc(placeholder);
+    };
 
     return (
       <div>
-        <Image src={logo.url} size="tiny" centered />
+        <Image src={imgSrc} size="tiny" centered onError={handleErr} />
         <Header size="huge" textAlign="center">
           {display.symbol}
           <Header.Subheader>{display.companyName}</Header.Subheader>
