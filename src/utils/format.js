@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import numeral from 'numeral';
 
 export const price = price => {
@@ -33,3 +34,15 @@ export const calcPercCh = (close, last) => {
   const num = (last - close) / close;
   return { num, perc: percent(num), color: color(num) };
 };
+
+export const upper = symbol => {
+  return _.toUpper(symbol);
+};
+
+export const quoteFormatting = quote => {
+  return {
+    symbol: upper(quote.symbol),
+    companyName: quote.companyName,
+    latestPrice: price(quote.latestPrice)
+  }
+}

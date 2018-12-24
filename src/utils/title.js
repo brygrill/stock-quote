@@ -1,10 +1,7 @@
-import _ from 'lodash';
-import { price } from './format';
-
 const setTitle = (symbol, quote) => {
   let title = '';
   if (symbol && quote) {
-    title = `${_.toUpper(symbol)} - ${price(quote)}`;
+    title = `${symbol} - ${quote}`;
   } else {
     title = 'Stock Quotes';
   }
