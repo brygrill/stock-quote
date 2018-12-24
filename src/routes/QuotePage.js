@@ -4,18 +4,15 @@ import QuoteData from '../components/QuoteData';
 import { DataContext } from '../components/WithDataContext';
 
 const QuotePage = props => {
-  const {
-    symbol,
-    fetchingQuote,
-    handleSymbolChange,
-    quoteData,
-    // fetchQuoteInterval,
-  } = useContext(DataContext);
+  const { symbol, fetchingQuote, handleSymbolChange, quoteData } = useContext(
+    DataContext,
+  );
 
+  // fetch new data every symbol changes
   useEffect(
     () => {
-      handleSymbolChange(props.symbol);
-      // if (symbol) fetchQuoteInterval(props.symbol, 5000);
+      if (props.symbol && props.symbol !== symbol)
+        handleSymbolChange(props.symbol);
     },
     [props.symbol, symbol],
   );
