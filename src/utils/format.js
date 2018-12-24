@@ -43,6 +43,8 @@ export const quoteFormatting = quote => {
   return {
     symbol: upper(quote.symbol),
     companyName: quote.companyName,
-    latestPrice: price(quote.latestPrice)
-  }
-}
+    latestPrice: price(quote.latestPrice),
+    change: price(quote.change),
+    changePercent: percent(quote.changePercent),
+  };
+};

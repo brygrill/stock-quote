@@ -1,18 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Header, Image } from 'semantic-ui-react';
+import Stats from './Stats';
 import NotFound from './NotFound';
 import { quoteFormatting } from '../utils/format';
 import setTitle from '../utils/title';
 
 const QuoteData = props => {
-
   if (props.data) {
     // format quote data
     const { quote, logo } = props.data;
     const display = quoteFormatting(quote);
     setTitle(display.symbol, display.latestPrice);
-    console.log(props.data);
+    console.log(display);
 
     return (
       <div>
@@ -21,6 +21,11 @@ const QuoteData = props => {
           {display.symbol}
           <Header.Subheader>{display.companyName}</Header.Subheader>
         </Header>
+        <Stats
+          last={display.latestPrice}
+          change={display.change}
+          percent={display.changePercent}
+        />
       </div>
     );
   }
