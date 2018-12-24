@@ -23,7 +23,8 @@ const Header = props => {
             </Segment>
             <Segment basic>
               <HeadlineQuotes
-                quotes={context.indiciesData}
+                currentQuote={context.quoteData}
+                incidies={context.indiciesData}
                 push={push}
                 media={matches}
               />

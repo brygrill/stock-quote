@@ -89,7 +89,6 @@ export const DataProvider = props => {
         quoteData,
         indiciesData,
         handleSymbolChange,
-        fetchQuoteInterval,
         ...props,
       }}
     >

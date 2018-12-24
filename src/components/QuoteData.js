@@ -12,7 +12,7 @@ const QuoteData = props => {
     const { quote, logo } = props.data;
     const display = quoteFormatting(quote);
     setTitle(display.symbol, display.latestPrice);
-    console.log(display);
+    // console.log(display);
 
     return (
       <div>

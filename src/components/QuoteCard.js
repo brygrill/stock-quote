@@ -1,31 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Card } from 'semantic-ui-react';
-import { price, calcPercCh } from '../utils/format';
 
-const QuoteCard = props => {
-  const change = calcPercCh(props.close, props.last);
+const QuoteCard = ({ color, symbol, changePercent, latestPrice, push }) => {
   return (
     <Card
-      color={change.color}
+      color={color}
       link
       onClick={(e, p) => {
-        props.push(props.symbol);
+        push(symbol);
       }}
     >
       <Card.Content>
-        <Card.Header content={props.symbol} />
-        <Card.Meta content={change.perc} />
-        <Card.Description content={price(props.last)} />
+        <Card.Header content={symbol} />
+        <Card.Meta content={changePercent} />
+        <Card.Description content={latestPrice} />
       </Card.Content>
     </Card>
   );
 };
 
 QuoteCard.propTypes = {
+  color: PropTypes.string.isRequired,
   symbol: PropTypes.string.isRequired,
-  last: PropTypes.number.isRequired,
-  close: PropTypes.number.isRequired,
+  latestPrice: PropTypes.string.isRequired,
+  changePercent: PropTypes.string.isRequired,
   push: PropTypes.func.isRequired,
 };
 

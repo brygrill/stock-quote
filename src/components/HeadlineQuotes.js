@@ -5,18 +5,31 @@ import { Card } from 'semantic-ui-react';
 
 import QuoteCard from './QuoteCard';
 
-const HeadlineQuotes = ({ quotes, push }) => {
+import { quoteFormatting } from '../utils/format';
+
+const HeadlineQuotes = ({ incidies, currentQuote, push }) => {
   return (
     <Card.Group centered stackable itemsPerRow={5}>
-      {_.map(quotes, (q, i) => {
+      {_.map(incidies, (q, i) => {
+        // if current quote in indicies, use that data
+        // so display is in sync
+        let display = null;
         const { quote } = q;
+        if (!_.isEmpty(currentQuote)) {
+          if (currentQuote.quote.symbol === i) {
+            display = quoteFormatting(currentQuote.quote);
+          } else {
+            display = quoteFormatting(quote);
+          }
+        }
+
         return (
           <QuoteCard
             key={i}
-            symbol={quote.symbol}
-            name={quote.companyName}
-            close={quote.close}
-            last={quote.latestPrice}
+            symbol={display.symbol}
+            color={display.status}
+            latestPrice={display.latestPrice}
+            changePercent={display.changePercent}
             push={push}
           />
         );
@@ -26,8 +39,17 @@ const HeadlineQuotes = ({ quotes, push }) => {
 };
 
 HeadlineQuotes.propTypes = {
-  quotes: PropTypes.object.isRequired,
+  incidies: PropTypes.object.isRequired,
+  quote: PropTypes.object,
   push: PropTypes.func.isRequired,
+};
+
+HeadlineQuotes.defaultProps = {
+  currentQuote: {
+    quote: {
+      symbol: null,
+    },
+  },
 };
 
 export default HeadlineQuotes;
