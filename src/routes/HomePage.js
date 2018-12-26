@@ -6,11 +6,15 @@ import NewsItems from '../components/NewsItems';
 const HomePage = props => {
   const context = useContext(DataContext);
   return (
-    <Segment>
-      <Header style={{ fontWeight: 300, fontSize: '2rem' }}>
-        Latest Headlines
-      </Header>
-      <NewsItems news={context.indiciesData.news} slice={10} />
+    <Segment style={{ minHeight: '300px' }}>
+      {!context.fetchingIncidies.loading && (
+        <React.Fragment>
+          <Header style={{ fontWeight: 300, fontSize: '2rem' }}>
+            Latest Headlines
+          </Header>
+          <NewsItems news={context.indiciesData.news} slice={10} />
+        </React.Fragment>
+      )}
     </Segment>
   );
 };
