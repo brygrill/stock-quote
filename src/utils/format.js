@@ -65,9 +65,10 @@ export const quoteFormatting = (quote, stats) => {
     marketCap: formatBigPrice(quote.marketCap),
     week52High: priceSimple(quote.week52High),
     week52Low: priceSimple(quote.week52Low),
-    ytdChange: percent(quote.ytdChange),
+    week52Ch: stats ? percent(stats.week52change / 100) : null,
+    ytdChange: stats ? percent(stats.ytdChangePercent) : null,
     yield: stats ? dividend(stats.dividendYield) : null,
     beta: stats ? formatNumber(stats.beta) : null,
-    eps: stats ? priceSimple(stats.latestEPS) : null,
+    eps: stats ? priceSimple(stats.ttmEPS) : null,
   };
 };

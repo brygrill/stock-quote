@@ -34,7 +34,7 @@ const StatsDetails = ({ data }) => {
         <List>
           <Item title="52W H" value={data.week52High} />
           <Item title="52W L" value={data.week52Low} />
-          <Item title="YTD" value={data.ytdChange} />
+          <Item title="52W Ch" value={data.week52Ch} />
         </List>
       </Grid.Column>
       <Grid.Column>
@@ -48,6 +48,8 @@ const StatsDetails = ({ data }) => {
   );
 };
 
-StatsDetails.propTypes = {};
+StatsDetails.propTypes = {
+  data: PropTypes.object.isRequired,
+};
 
 export default StatsDetails;
