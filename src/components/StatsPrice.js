@@ -21,7 +21,7 @@ const Dollar = styled.span`
   font-size: 2rem;
 `
 
-const Stats = ({ last, change, percent, color }) => {
+const StatsPrice = ({ last, change, percent, color }) => {
   return (
     <StatWrap>
       <Statistic style={{ marginBottom: 0 }}>
@@ -39,10 +39,10 @@ const Stats = ({ last, change, percent, color }) => {
   );
 };
 
-Stats.propTypes = {
+StatsPrice.propTypes = {
   last: PropTypes.string.isRequired,
   change: PropTypes.string.isRequired,
   percent: PropTypes.string.isRequired,
 };
 
-export default Stats;
+export default StatsPrice;

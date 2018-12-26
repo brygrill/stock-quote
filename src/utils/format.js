@@ -13,12 +13,16 @@ export const percent = percent => {
   return numeral(percent).format('+0.00%');
 };
 
+export const dividend = percent => {
+  return numeral(percent/100).format('0.00%');
+}
+
 export const formatNumber = num => {
   return numeral(num).format('0.00a');
 };
 
 export const formatBigPrice = cap => {
-  return numeral(cap).format('($0.00 a)');
+  return numeral(cap).format('(0.0a)');
 };
 
 export const formatBigPriceNoDecimal = cap => {
@@ -43,7 +47,7 @@ export const upper = symbol => {
   return _.toUpper(symbol);
 };
 
-export const quoteFormatting = quote => {
+export const quoteFormatting = (quote, stats) => {
   return {
     symbol: upper(quote.symbol),
     companyName: quote.companyName,
@@ -52,5 +56,18 @@ export const quoteFormatting = quote => {
     change: price(quote.change),
     changePercent: percent(quote.changePercent),
     status: color(quote.change),
+    open: priceSimple(quote.open),
+    high: priceSimple(quote.high),
+    low: priceSimple(quote.low),
+    vol: formatNumber(quote.latestVolume),
+    avgVol: formatNumber(quote.avgTotalVolume),
+    peRatio: quote.peRatio || '-',
+    marketCap: formatBigPrice(quote.marketCap),
+    week52High: priceSimple(quote.week52High),
+    week52Low: priceSimple(quote.week52Low),
+    ytdChange: percent(quote.ytdChange),
+    yield: stats ? dividend(stats.dividendYield) : null,
+    beta: stats ? formatNumber(stats.beta) : null,
+    eps: stats ? priceSimple(stats.latestEPS) : null,
   };
 };

@@ -1,24 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Header, Image } from 'semantic-ui-react';
-import Stats from './Stats';
+import { Grid, Segment, Header, Image } from 'semantic-ui-react';
+
+import StatsPrice from './StatsPrice';
+import StatsDetails from './StatsDetails';
 import NotFound from './NotFound';
+
 import { quoteFormatting } from '../utils/format';
 import setTitle from '../utils/title';
+
 import placeholder from '../assets/iex-logo.png';
 
 const QuoteData = props => {
   if (props.data) {
+    console.log(props);
     // format quote data
-    const { quote, logo } = props.data;
-    const display = quoteFormatting(quote);
+    const { quote, stats, logo } = props.data;
+    const display = quoteFormatting(quote, stats);
     setTitle(display.symbol, display.latestPrice);
 
     // set img
     const [imgSrc, setImgSrc] = useState(logo.url);
-    useEffect(() => {
-      setImgSrc(logo.url);
-    }, [logo.url]);
+    useEffect(
+      () => {
+        setImgSrc(logo.url);
+      },
+      [logo.url],
+    );
 
     const handleErr = e => {
       setImgSrc(placeholder);
@@ -31,12 +39,17 @@ const QuoteData = props => {
           {display.symbol}
           <Header.Subheader>{display.companyName}</Header.Subheader>
         </Header>
-        <Stats
+        <StatsPrice
           last={display.latestPriceSimple}
           change={display.change}
           percent={display.changePercent}
           color={display.status}
         />
+        <Segment basic>
+          <Grid stackable relaxed>
+            <StatsDetails data={display} />
+          </Grid>
+        </Segment>
       </div>
     );
   }
