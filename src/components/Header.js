@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Segment } from 'semantic-ui-react';
 import Media from 'react-media';
 import { withRouter } from 'react-router';
+
 import SearchInput from './SearchInput';
 import HeadlineQuotes from './HeadlineQuotes';
 import { DataContext } from '../components/WithDataContext';
