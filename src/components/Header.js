@@ -19,17 +19,23 @@ const Header = props => {
       <Media query="(max-width: 768px)">
         {matches => (
           <React.Fragment>
-            <Segment basic textAlign="center" style={{ margin: '0 0 -1rem 0' }}>
+            <Segment
+              basic
+              textAlign="center"
+              style={!matches ? { margin: '0 0 -2rem 0' } : null}
+            >
               <SearchInput />
             </Segment>
-            <Segment basic>
-              <HeadlineQuotes
-                currentQuote={context.quoteData}
-                incidies={context.indiciesData}
-                push={push}
-                media={matches}
-              />
-            </Segment>
+            {!matches && (
+              <Segment basic>
+                <HeadlineQuotes
+                  currentQuote={context.quoteData}
+                  incidies={context.indiciesData}
+                  push={push}
+                  media={matches}
+                />
+              </Segment>
+            )}
           </React.Fragment>
         )}
       </Media>
