@@ -7,22 +7,25 @@ import QuoteCard from './QuoteCard';
 
 import { quoteFormatting } from '../utils/format';
 
+const setDisplay = (current, quote, i) => {
+  // if current quote in indicies, use that data
+  // so display is in sync
+  if (!_.isEmpty(current)) {
+    if (current.quote.symbol === i) {
+      return quoteFormatting(current.quote);
+    } else {
+      return quoteFormatting(quote);
+    }
+  }
+  // if on homepage, dont worry about syncing quote
+  return quoteFormatting(quote);
+};
+
 const HeadlineQuotes = ({ incidies, currentQuote, push }) => {
   return (
     <Card.Group centered stackable itemsPerRow={5}>
       {_.map(incidies, (q, i) => {
-        // if current quote in indicies, use that data
-        // so display is in sync
-        let display = null;
-        const { quote } = q;
-        if (!_.isEmpty(currentQuote)) {
-          if (currentQuote.quote.symbol === i) {
-            display = quoteFormatting(currentQuote.quote);
-          } else {
-            display = quoteFormatting(quote);
-          }
-        }
-
+        const display = setDisplay(currentQuote, q.quote, i)
         return (
           <QuoteCard
             key={i}
