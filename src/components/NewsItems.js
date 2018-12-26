@@ -4,17 +4,16 @@ import _ from 'lodash';
 import moment from 'moment';
 import { Grid, Item } from 'semantic-ui-react';
 
-const NewsItems = ({ news }) => {
-  console.log(news);
+const NewsItems = ({ news, slice }) => {
   return (
     <Grid.Row>
       <Grid.Column>
         <Item.Group relaxed link>
           {_.chain(news)
-            .slice(0, 5)
+            .slice(0, slice)
             .map(n => {
               return (
-                <Item href={n.url} key={n.datetime} target="_blank">
+                <Item href={n.url} key={n.url} target="_blank">
                   <Item.Content>
                     <Item.Header>{n.headline}</Item.Header>
                     <Item.Meta>{`Via ${n.source}`}</Item.Meta>
@@ -33,6 +32,11 @@ const NewsItems = ({ news }) => {
 
 NewsItems.propTypes = {
   news: PropTypes.array.isRequired,
+  slice: PropTypes.number,
 };
+
+NewsItems.defaultProps = {
+  slice: 5,
+}
 
 export default NewsItems;

@@ -30,7 +30,7 @@ const Header = props => {
               <Segment basic>
                 <HeadlineQuotes
                   currentQuote={context.quoteData}
-                  incidies={context.indiciesData}
+                  incidies={context.indiciesData.quotes}
                   push={push}
                   media={matches}
                 />

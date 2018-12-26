@@ -25,7 +25,10 @@ export const DataProvider = props => {
 
   const [refresh, setRefresh] = useState(null)
 
-  const [indiciesData, setIndiciesData] = useState({});
+  const [indiciesData, setIndiciesData] = useState({
+    quotes: {},
+    news: []
+  });
 
   const fetchIncidiesInterval = () => {
     setInterval(async () => {

@@ -19,15 +19,28 @@ export const fetchBatchData = async symbols => {
   const { data } = await iex.get(`/market/batch`, {
     params: {
       symbols,
-      types: 'quote,chart',
-      range: '1y',
+      types: 'quote',
     },
   });
   return data;
 };
 
-export const fetchIndiciesData = async symbols => {
-  const quotes = await fetchBatchData(_.toString(symbols));
+export const fetchMarketNews = async () => {
+  const { data } = await iex.get(`/market/news`);
+  return data;
+};
 
-  return quotes;
+export const fetchInFocus = async () => {
+  const { data } = await iex.get(`/market/list/infocus`);
+  return data;
+};
+
+export const fetchIndiciesData = async symbols => {
+  const data = await Promise.all([
+    await fetchBatchData(_.toString(symbols)),
+    await fetchMarketNews(),
+    await fetchInFocus(),
+  ]);
+
+  return { quotes: data[0], news: data[1], infocus: data[2] };
 };
