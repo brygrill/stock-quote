@@ -4,10 +4,14 @@ import styled from 'styled-components';
 import { Statistic } from 'semantic-ui-react';
 
 const StatWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+
   @media (min-width: 768px) {
-    display: flex;
     justify-content: space-around;
-    align-items: center;
+    flex-direction: inherit;
   }
 `;
 

@@ -5,9 +5,13 @@ import { Segment } from 'semantic-ui-react';
 import { DataContext } from '../components/WithDataContext';
 
 const QuotePage = props => {
-  const { symbol, fetchingQuote, handleSymbolChange, quoteData } = useContext(
-    DataContext,
-  );
+  const {
+    symbol,
+    fetchingQuote,
+    fetchingIncidies,
+    handleSymbolChange,
+    quoteData,
+  } = useContext(DataContext);
 
   // fetch new data every symbol changes
   useEffect(
@@ -19,8 +23,11 @@ const QuotePage = props => {
   );
 
   return (
-    <Segment loading={fetchingQuote.loading} textAlign="center">
-      <QuoteData symbol={symbol} data={quoteData} />
+    <Segment
+      loading={fetchingQuote.loading && !fetchingIncidies.loading}
+      style={{ minHeight: '300px' }}
+    >
+      {!fetchingQuote.loading && <QuoteData symbol={symbol} data={quoteData} />}
     </Segment>
   );
 };
