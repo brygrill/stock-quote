@@ -47,11 +47,9 @@ const QuoteData = props => {
           color={display.status}
         />
         <Segment basic>
-          <Grid stackable relaxed divided>
+          <Grid stackable divided>
             <StatsDetails data={display} />
-            <Divider />
             <Chart chart={chart} display={display}/>
-            <Divider />
             <NewsItems news={news} />
           </Grid>
         </Segment>

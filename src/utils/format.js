@@ -70,6 +70,7 @@ export const quoteFormatting = (quote, stats) => {
     week52High: priceSimple(quote.week52High),
     week52Low: priceSimple(quote.week52Low),
     week52Ch: stats ? percent(stats.week52change / 100) : null,
+    week52Up: stats? stats.week52change > 0 : null,
     ytdChange: stats ? percent(stats.ytdChangePercent) : null,
     yield: stats ? dividend(stats.dividendYield) : null,
     beta: stats ? formatNumber(stats.beta) : null,
