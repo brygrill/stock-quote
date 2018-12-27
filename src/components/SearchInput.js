@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { connectAutoComplete } from 'react-instantsearch-dom';
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import { Search } from 'semantic-ui-react';
 
 const formatHits = hits => {

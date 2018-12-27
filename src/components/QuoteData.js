@@ -13,6 +13,7 @@ import setTitle from '../utils/title';
 import placeholder from '../assets/iex-logo.png';
 
 const QuoteData = props => {
+  console.log(props);
   if (props.data) {
     // console.log(props);
     // format quote data
@@ -49,7 +50,7 @@ const QuoteData = props => {
         <Segment basic>
           <Grid stackable relaxed divided>
             <StatsDetails data={display} />
-            <NewsItems news={news}/>
+            <NewsItems news={news} />
           </Grid>
         </Segment>
       </div>

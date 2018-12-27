@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import { Card } from 'semantic-ui-react';
+import { Card, Menu } from 'semantic-ui-react';
 
 import QuoteCard from './QuoteCard';
 
@@ -23,21 +23,29 @@ const setDisplay = (current, quote, i) => {
 
 const HeadlineQuotes = ({ incidies, currentQuote, push }) => {
   return (
-    <Card.Group centered stackable itemsPerRow={5}>
-      {_.map(incidies, (q, i) => {
-        const display = setDisplay(currentQuote, q.quote, i)
-        return (
-          <QuoteCard
-            key={i}
-            symbol={display.symbol}
-            color={display.status}
-            latestPrice={display.latestPrice}
-            changePercent={display.changePercent}
-            push={push}
-          />
-        );
-      })}
-    </Card.Group>
+    <React.Fragment>
+      <Card.Group centered stackable itemsPerRow={5}>
+        {_.map(incidies, (q, i) => {
+          const display = setDisplay(currentQuote, q.quote, i);
+          return (
+            <QuoteCard
+              key={i}
+              symbol={display.symbol}
+              color={display.status}
+              latestPrice={display.latestPrice}
+              changePercent={display.changePercent}
+              push={push}
+            />
+          );
+        })}
+      </Card.Group>
+      <Menu>
+        {_.map(incidies, (q, i) => {
+          const display = setDisplay(currentQuote, q.quote, i);
+          return <Menu.Item>{display.symbol}</Menu.Item>;
+        })}
+      </Menu>
+    </React.Fragment>
   );
 };
 
