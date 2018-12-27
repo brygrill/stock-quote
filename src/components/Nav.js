@@ -1,10 +1,22 @@
 import React, { useContext } from 'react';
 import _ from 'lodash';
-import { Link, withRouter } from 'react-router-dom';
-import { Menu } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import { Menu, Header } from 'semantic-ui-react';
+import styled from 'styled-components';
 import { DataContext } from '../components/WithDataContext';
-import QuoteItem from './QuoteData';
 import { quoteFormatting } from '../utils/format';
+
+const Title = styled.h1`
+  font-size: 2.25rem;
+  font-weight: 300;
+  text-align: center;
+  padding: 0.5rem;
+  margin: 0;
+`;
+
+const QuoteSymbol = styled.span`
+  color: #fff !important;
+`;
 
 const setDisplay = (current, quote, i) => {
   // if current quote in indicies, use that data
@@ -23,21 +35,32 @@ const setDisplay = (current, quote, i) => {
 const Nav = props => {
   const context = useContext(DataContext);
   return (
-    <Menu fluid style={{ marginBottom: 0 }}>
-      <Menu.Item header>
+    <React.Fragment>
+      <Title>
         <Link to="/" style={{ color: 'black' }}>
-          Home
+          Stock Quotes
         </Link>
-      </Menu.Item>
-      {/* {_.map(context.indiciesData.quotes, (q, i) => {
-        // const display = setDisplay(context.quoteData, q.quote, i);
-        return (
-          <QuoteItem key={i} display={i}/>
-        );
-      })} */}
-    </Menu>
+      </Title>
+      <Menu style={{ marginTop: 0 }} widths={4} inverted>
+        {_.map(context.indiciesData.quotes, (q, i) => {
+          const display = setDisplay(context.quoteData, q.quote, i);
+          return (
+            <Menu.Item key={i} active>
+              <Link to={`/${_.lowerCase(i)}`}>
+                <Header as="h5" inverted color={display.status}>
+                  <QuoteSymbol>{i}</QuoteSymbol>
+                  <span>
+                    <div>{display.latestPriceSimple}</div>
+                    <div>{display.changePercent}</div>
+                  </span>
+                </Header>
+              </Link>
+            </Menu.Item>
+          );
+        })}
+      </Menu>
+    </React.Fragment>
   );
 };
 
-// export default withRouter(Nav);
 export default Nav;

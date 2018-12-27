@@ -5,7 +5,7 @@ import SearchInput from './SearchInput';
 
 const Header = props => {
   return (
-    <Segment basic textAlign="center" style={{ marginBottom: 0 }}>
+    <Segment basic textAlign="center">
       <SearchInput />
     </Segment>
   );

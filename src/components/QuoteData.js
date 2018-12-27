@@ -13,9 +13,7 @@ import setTitle from '../utils/title';
 import placeholder from '../assets/iex-logo.png';
 
 const QuoteData = props => {
-  console.log(props);
   if (props.data) {
-    // console.log(props);
     // format quote data
     const { quote, stats, logo, news } = props.data;
     const display = quoteFormatting(quote, stats);
