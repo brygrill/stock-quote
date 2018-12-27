@@ -27,7 +27,13 @@ const QuotePage = props => {
       loading={fetchingQuote.loading && !fetchingIncidies.loading}
       style={{ minHeight: '300px' }}
     >
-      {!fetchingQuote.loading && <QuoteData symbol={symbol} data={quoteData} />}
+      {!fetchingQuote.loading && (
+        <QuoteData
+          symbol={symbol}
+          data={quoteData.quote}
+          charts={quoteData.charts}
+        />
+      )}
     </Segment>
   );
 };

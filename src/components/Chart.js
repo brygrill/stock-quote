@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Media from 'react-media';
-import { Grid, Header, Segment, List, Divider, Label } from 'semantic-ui-react';
+import { Grid, Header, Segment, List } from 'semantic-ui-react';
 import {
   ResponsiveContainer,
   AreaChart,
@@ -32,22 +32,24 @@ const CustomTooltip = ({ chart, label, active }) => {
   return null;
 };
 
-const Chart = ({ chart, display }) => {
+const Chart = ({ charts, display }) => {
+  const [activeChart, setActiveChart] = useState('ytd');
   return (
     <Media
       query="(min-width: 768px)"
       render={() => (
         <React.Fragment>
-          <Divider />
           <Grid.Row>
             <Grid.Column>
               <Segment>
                 <Header as="h3" textAlign="center">
-                  1 YR Chart
+                  YTD Chart
                 </Header>
-                <ResponsiveContainer height={400}>
-                  <AreaChart data={chart}>
-                    <Tooltip content={<CustomTooltip chart={chart} />} />
+                <ResponsiveContainer height={300}>
+                  <AreaChart data={charts[activeChart]}>
+                    <Tooltip
+                      content={<CustomTooltip chart={charts[activeChart]} />}
+                    />
                     <XAxis tick={false} hide />
                     <YAxis
                       hide
@@ -68,7 +70,6 @@ const Chart = ({ chart, display }) => {
               </Segment>
             </Grid.Column>
           </Grid.Row>
-          <Divider />
         </React.Fragment>
       )}
     />
@@ -76,7 +77,7 @@ const Chart = ({ chart, display }) => {
 };
 
 Chart.propTypes = {
-  chart: PropTypes.array.isRequired,
+  charts: PropTypes.object.isRequired,
   display: PropTypes.object.isRequired,
 };
 

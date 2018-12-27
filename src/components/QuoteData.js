@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Segment, Header, Image, Divider } from 'semantic-ui-react';
+import { Grid, Segment, Header, Image } from 'semantic-ui-react';
 
 import StatsPrice from './StatsPrice';
 import StatsDetails from './StatsDetails';
@@ -14,9 +14,11 @@ import setTitle from '../utils/title';
 import placeholder from '../assets/iex-logo.png';
 
 const QuoteData = props => {
-  if (props.data) {
+  console.log(props)
+  if (props.data && props.charts) {
     // format quote data
-    const { quote, stats, logo, chart, news } = props.data;
+    const { quote, stats, logo, news } = props.data;
+
     const display = quoteFormatting(quote, stats);
     setTitle(display.symbol, display.latestPrice);
 
@@ -49,7 +51,7 @@ const QuoteData = props => {
         <Segment basic>
           <Grid stackable divided>
             <StatsDetails data={display} />
-            <Chart chart={chart} display={display}/>
+            <Chart charts={props.charts} display={display}/>
             <NewsItems news={news} />
           </Grid>
         </Segment>

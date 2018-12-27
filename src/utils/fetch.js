@@ -5,14 +5,48 @@ const iex = axios.create({
   baseURL: 'https://api.iextrading.com/1.0/stock',
 });
 
-export const fetchQuoteData = async symbol => {
+export const fetchChart = async (symbol, range) => {
+  const { data } = await iex.get(`/${symbol}/chart/${range}`, {
+    params: {},
+  });
+  return data;
+};
+export const fetchAllCharts = async symbol => {
+  const data = await Promise.all([
+    await fetchChart(symbol, '1d'),
+    await fetchChart(symbol, '1m'),
+    await fetchChart(symbol, '3m'),
+    await fetchChart(symbol, '6m'),
+    await fetchChart(symbol, '1y'),
+    await fetchChart(symbol, 'ytd'),
+  ]);
+
+  return {
+    d1: data[0],
+    m1: data[1],
+    m3: data[2],
+    m6: data[3],
+    y1: data[4],
+    ytd: data[5],
+  };
+};
+
+export const fetchQuote = async symbol => {
   const { data } = await iex.get(`/${symbol}/batch`, {
     params: {
-      types: 'quote,chart,dividends,logo,stats,news',
-      range: '1y',
+      types: 'quote,logo,stats,news',
     },
   });
   return data;
+};
+
+export const fetchQuoteData = async symbol => {
+  const data = await Promise.all([
+    await fetchQuote(symbol),
+    await fetchAllCharts(symbol),
+  ]);
+
+  return { quote: data[0], charts: data[1] };
 };
 
 export const fetchBatchData = async symbols => {
