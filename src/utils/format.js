@@ -21,6 +21,10 @@ export const formatNumber = num => {
   return numeral(num).format('0.00a');
 };
 
+export const numRounded = num => {
+  return numeral(num).format('0,0');
+}
+
 export const formatBigPrice = cap => {
   return numeral(cap).format('(0.0a)');
 };

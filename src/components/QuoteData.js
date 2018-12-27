@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Segment, Header, Image } from 'semantic-ui-react';
+import { Grid, Segment, Header, Image, Divider } from 'semantic-ui-react';
 
 import StatsPrice from './StatsPrice';
 import StatsDetails from './StatsDetails';
 import NewsItems from './NewsItems';
+import Chart from './Chart';
 import NotFound from './NotFound';
 
 import { quoteFormatting } from '../utils/format';
@@ -15,7 +16,7 @@ import placeholder from '../assets/iex-logo.png';
 const QuoteData = props => {
   if (props.data) {
     // format quote data
-    const { quote, stats, logo, news } = props.data;
+    const { quote, stats, logo, chart, news } = props.data;
     const display = quoteFormatting(quote, stats);
     setTitle(display.symbol, display.latestPrice);
 
@@ -48,6 +49,9 @@ const QuoteData = props => {
         <Segment basic>
           <Grid stackable relaxed divided>
             <StatsDetails data={display} />
+            <Divider />
+            <Chart chart={chart} display={display}/>
+            <Divider />
             <NewsItems news={news} />
           </Grid>
         </Segment>

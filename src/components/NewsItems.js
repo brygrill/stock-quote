@@ -18,7 +18,9 @@ const NewsItems = ({ news, slice }) => {
                     <Item.Header>{n.headline}</Item.Header>
                     <Item.Meta>{`Via ${n.source}`}</Item.Meta>
                     <Item.Description>{n.summary}</Item.Description>
-                    <Item.Extra>{moment(n.datetime).format('dddd, MMMM Do YYYY, h:mm a')}</Item.Extra>
+                    <Item.Extra>
+                      {moment(n.datetime).format('dddd, MMMM Do YYYY, h:mm a')}
+                    </Item.Extra>
                   </Item.Content>
                 </Item>
               );
@@ -37,6 +39,6 @@ NewsItems.propTypes = {
 
 NewsItems.defaultProps = {
   slice: 5,
-}
+};
 
 export default NewsItems;
