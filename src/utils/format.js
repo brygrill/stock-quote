@@ -52,7 +52,6 @@ export const upper = symbol => {
 };
 
 export const chartUpDown = (range, data) => {
-  console.log(data);
   if (range === 'd1') {
     const last = _.last(data).marketChangeOverTime;
     return { up: last >= 0, perc: percent(last) };
@@ -62,10 +61,9 @@ export const chartUpDown = (range, data) => {
 };
 
 export const formatDayChart = data => {
-  console.log(data);
   return _.chain(data)
-    .map(d => {
-      return _.assign(d, { close: d.close || d.marketClose });
+    .map((d, i) => {
+      return _.assign(d, { close: d.close || d.marketClose, index: i });
     })
     .value();
 };

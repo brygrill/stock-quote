@@ -54,14 +54,27 @@ const Chart = ({ charts, display }) => {
                     <Tooltip
                       content={<CustomTooltip chart={charts[activeChart]} />}
                     />
-                    <XAxis tick={false} hide />
+                    {activeChart === 'd1' ? (
+                      <XAxis
+                        tick={false}
+                        hide
+                        type="number"
+                        dataKey="index"
+                        domain={['dataMin', 390]}
+                      />
+                    ) : (
+                      <XAxis
+                        tick={false}
+                        hide
+                      />
+                    )}
                     <YAxis
                       hide
                       tick={false}
                       type="number"
                       tickFormatter={t => numRounded(t)}
                       interval={2}
-                      domain={['dataMin', 'dataMax']}
+                      domain={[dataMin => dataMin - dataMin * 0.005, 'dataMax']}
                     />
                     <Area
                       type="monotone"
