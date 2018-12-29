@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Media from 'react-media';
-import { Grid, Header, Segment, List } from 'semantic-ui-react';
+import { Grid, Segment, List } from 'semantic-ui-react';
 import {
   ResponsiveContainer,
   AreaChart,
@@ -10,7 +10,14 @@ import {
   YAxis,
   Tooltip,
 } from 'recharts';
-import { percent, price, numRounded, formatNumber } from '../utils/format';
+import ChartMenu from './ChartMenu';
+import {
+  percent,
+  price,
+  numRounded,
+  formatNumber,
+  chartUpDown,
+} from '../utils/format';
 
 const CustomTooltip = ({ chart, label, active }) => {
   if (chart[label] && active) {
@@ -33,7 +40,8 @@ const CustomTooltip = ({ chart, label, active }) => {
 };
 
 const Chart = ({ charts, display }) => {
-  const [activeChart, setActiveChart] = useState('ytd');
+  const [activeChart, setActiveChart] = useState('d1');
+  const chartUp = chartUpDown(activeChart, charts[activeChart]);
   return (
     <Media
       query="(min-width: 768px)"
@@ -41,10 +49,8 @@ const Chart = ({ charts, display }) => {
         <React.Fragment>
           <Grid.Row>
             <Grid.Column>
-              <Segment>
-                <Header as="h3" textAlign="center">
-                  YTD Chart
-                </Header>
+              <ChartMenu active={activeChart} onClick={setActiveChart} />
+              <Segment attached>
                 <ResponsiveContainer height={300}>
                   <AreaChart data={charts[activeChart]}>
                     <Tooltip
@@ -62,8 +68,8 @@ const Chart = ({ charts, display }) => {
                     <Area
                       type="monotone"
                       dataKey="close"
-                      stroke={display.week52Up ? '#2ecc40' : '#db2828'}
-                      fill={display.week52Up ? '#2ecc408a' : '#db28288a'}
+                      stroke={chartUp ? '#2ecc40' : '#db2828'}
+                      fill={chartUp ? '#2ecc408a' : '#db28288a'}
                     />
                   </AreaChart>
                 </ResponsiveContainer>

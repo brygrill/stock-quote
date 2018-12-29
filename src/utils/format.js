@@ -51,6 +51,16 @@ export const upper = symbol => {
   return _.toUpper(symbol);
 };
 
+export const chartUpDown = (range, data) => {
+  console.log(range);
+  console.log(data);
+  if (range === 'd1') {
+    return _.last(data).marketChangeOverTime >= 0;
+  }
+
+  return _.last(data).changeOverTime >= 0;
+};
+
 export const quoteFormatting = (quote, stats) => {
   return {
     symbol: upper(quote.symbol),
