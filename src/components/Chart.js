@@ -12,7 +12,6 @@ import {
 } from 'recharts';
 import ChartMenu from './ChartMenu';
 import {
-  percent,
   price,
   numRounded,
   formatNumber,
@@ -29,7 +28,6 @@ const CustomTooltip = ({ chart, label, active }) => {
             <List.Header>{item.label}</List.Header>
           </List.Item>
           <List.Item>Close: {price(item.close)}</List.Item>
-          <List.Item>Change: {percent(item.changePercent / 100)}</List.Item>
           <List.Item>Vol: {formatNumber(item.volume)}</List.Item>
         </List>
       </Segment>

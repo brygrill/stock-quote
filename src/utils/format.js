@@ -14,8 +14,8 @@ export const percent = percent => {
 };
 
 export const dividend = percent => {
-  return numeral(percent/100).format('0.00%');
-}
+  return numeral(percent / 100).format('0.00%');
+};
 
 export const formatNumber = num => {
   return numeral(num).format('0.00a');
@@ -23,7 +23,7 @@ export const formatNumber = num => {
 
 export const numRounded = num => {
   return numeral(num).format('0,0');
-}
+};
 
 export const formatBigPrice = cap => {
   return numeral(cap).format('(0.0a)');
@@ -52,13 +52,21 @@ export const upper = symbol => {
 };
 
 export const chartUpDown = (range, data) => {
-  console.log(range);
-  console.log(data);
   if (range === 'd1') {
     return _.last(data).marketChangeOverTime >= 0;
   }
 
   return _.last(data).changeOverTime >= 0;
+};
+
+export const formatDayChart = data => {
+  console.log(data);
+  return _.chain(data)
+    .map(d => {
+      return _.assign(d, { close: d.close || d.marketClose });
+    })
+    .value();
+  // return data;
 };
 
 export const quoteFormatting = (quote, stats) => {
@@ -80,7 +88,7 @@ export const quoteFormatting = (quote, stats) => {
     week52High: priceSimple(quote.week52High),
     week52Low: priceSimple(quote.week52Low),
     week52Ch: stats ? percent(stats.week52change / 100) : null,
-    week52Up: stats? stats.week52change > 0 : null,
+    week52Up: stats ? stats.week52change > 0 : null,
     ytdChange: stats ? percent(stats.ytdChangePercent) : null,
     yield: stats ? dividend(stats.dividendYield) : null,
     beta: stats ? formatNumber(stats.beta) : null,

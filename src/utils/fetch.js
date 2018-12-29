@@ -1,5 +1,6 @@
 import axios from 'axios';
 import _ from 'lodash';
+import { formatDayChart } from './format';
 
 const iex = axios.create({
   baseURL: 'https://api.iextrading.com/1.0/stock',
@@ -22,7 +23,7 @@ export const fetchAllCharts = async symbol => {
   ]);
 
   return {
-    d1: data[0],
+    d1: formatDayChart(data[0]),
     m1: data[1],
     m3: data[2],
     m6: data[3],
