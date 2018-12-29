@@ -44,8 +44,8 @@ const Chart = ({ charts, display }) => {
             <Grid.Column>
               <ChartMenu
                 active={activeChart}
-                perc={perc}
-                up={up}
+                perc={activeChart === 'd1' ? display.changePercent : perc}
+                up={activeChart === 'd1' ? display.up : up}
                 onClick={setActiveChart}
               />
               <Segment attached>

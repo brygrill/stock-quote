@@ -76,6 +76,7 @@ export const quoteFormatting = (quote, stats) => {
     latestPriceSimple: priceSimple(quote.latestPrice),
     change: price(quote.change),
     changePercent: percent(quote.changePercent),
+    up: quote.changePercent > 0,
     status: color(quote.change),
     open: priceSimple(quote.open),
     high: priceSimple(quote.high),
