@@ -11,12 +11,7 @@ import {
   Tooltip,
 } from 'recharts';
 import ChartMenu from './ChartMenu';
-import {
-  price,
-  numRounded,
-  formatNumber,
-  chartUpDown,
-} from '../utils/format';
+import { price, numRounded, formatNumber, chartUpDown } from '../utils/format';
 
 const CustomTooltip = ({ chart, label, active }) => {
   if (chart[label] && active) {
@@ -39,7 +34,7 @@ const CustomTooltip = ({ chart, label, active }) => {
 
 const Chart = ({ charts, display }) => {
   const [activeChart, setActiveChart] = useState('d1');
-  const chartUp = chartUpDown(activeChart, charts[activeChart]);
+  const { up, perc } = chartUpDown(activeChart, charts[activeChart]);
   return (
     <Media
       query="(min-width: 768px)"
@@ -47,7 +42,12 @@ const Chart = ({ charts, display }) => {
         <React.Fragment>
           <Grid.Row>
             <Grid.Column>
-              <ChartMenu active={activeChart} onClick={setActiveChart} />
+              <ChartMenu
+                active={activeChart}
+                perc={perc}
+                up={up}
+                onClick={setActiveChart}
+              />
               <Segment attached>
                 <ResponsiveContainer height={300}>
                   <AreaChart data={charts[activeChart]}>
@@ -66,8 +66,8 @@ const Chart = ({ charts, display }) => {
                     <Area
                       type="monotone"
                       dataKey="close"
-                      stroke={chartUp ? '#2ecc40' : '#db2828'}
-                      fill={chartUp ? '#2ecc408a' : '#db28288a'}
+                      stroke={up ? '#2ecc40' : '#db2828'}
+                      fill={up ? '#2ecc408a' : '#db28288a'}
                     />
                   </AreaChart>
                 </ResponsiveContainer>

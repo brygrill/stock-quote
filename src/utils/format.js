@@ -52,11 +52,13 @@ export const upper = symbol => {
 };
 
 export const chartUpDown = (range, data) => {
+  console.log(data);
   if (range === 'd1') {
-    return _.last(data).marketChangeOverTime >= 0;
+    const last = _.last(data).marketChangeOverTime;
+    return { up: last >= 0, perc: percent(last) };
   }
-
-  return _.last(data).changeOverTime >= 0;
+  const last = _.last(data).changeOverTime;
+  return { up: last >= 0, perc: percent(last) };
 };
 
 export const formatDayChart = data => {
@@ -66,7 +68,6 @@ export const formatDayChart = data => {
       return _.assign(d, { close: d.close || d.marketClose });
     })
     .value();
-  // return data;
 };
 
 export const quoteFormatting = (quote, stats) => {
