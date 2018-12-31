@@ -3,7 +3,7 @@ const setTitle = (symbol, quote) => {
   if (symbol && quote) {
     title = `${symbol} - ${quote}`;
   } else {
-    title = 'Stock Quotes';
+    title = 'QUOTES.NINJA';
   }
 
   document.title = title;

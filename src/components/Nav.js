@@ -7,6 +7,7 @@ import { DataContext } from '../components/WithDataContext';
 import { quoteFormatting } from '../utils/format';
 
 const Title = styled.h1`
+  font-family: 'Staatliches', cursive;
   font-size: 2.25rem;
   font-weight: 300;
   text-align: center;
@@ -38,7 +39,7 @@ const Nav = props => {
     <React.Fragment>
       <Title>
         <Link to="/" style={{ color: 'black' }}>
-          Stock Quotes
+          quotes.ninja
         </Link>
       </Title>
       <Menu style={{ marginTop: 0 }} widths={4} inverted>
