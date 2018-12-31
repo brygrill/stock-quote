@@ -9,6 +9,8 @@ import {
   XAxis,
   YAxis,
   Tooltip,
+  ComposedChart,
+  Bar,
 } from 'recharts';
 import ChartMenu from './ChartMenu';
 import { price, numRounded, formatNumber, chartUpDown } from '../utils/format';
@@ -35,6 +37,7 @@ const CustomTooltip = ({ chart, label, active }) => {
 const Chart = ({ charts, display }) => {
   const [activeChart, setActiveChart] = useState('d1');
   const { up, perc } = chartUpDown(activeChart, charts[activeChart]);
+  console.log(charts[activeChart]);
   return (
     <Media
       query="(min-width: 768px)"
@@ -49,8 +52,9 @@ const Chart = ({ charts, display }) => {
                 onClick={setActiveChart}
               />
               <Segment attached>
+              
                 <ResponsiveContainer height={300}>
-                  <AreaChart data={charts[activeChart]}>
+                  <ComposedChart data={charts[activeChart]}>
                     <Tooltip
                       content={<CustomTooltip chart={charts[activeChart]} />}
                     />
@@ -63,26 +67,37 @@ const Chart = ({ charts, display }) => {
                         domain={['dataMin', 390]}
                       />
                     ) : (
-                      <XAxis
-                        tick={false}
-                        hide
-                      />
+                      <XAxis tick={false} hide />
                     )}
                     <YAxis
                       hide
+                      dataKey="close"
+                      yAxisId="left"
                       tick={false}
                       type="number"
                       tickFormatter={t => numRounded(t)}
                       interval={2}
                       domain={[dataMin => dataMin - dataMin * 0.005, 'dataMax']}
                     />
+                    <YAxis
+                      hide
+                      dataKey="volume"
+                      yAxisId="right"
+                      tick={false}
+                      type="number"
+                      padding={{top: 200 }}
+                      domain={['dataMin', 'dataMax']}
+                    />
                     <Area
                       type="monotone"
+                      yAxisId="left"
                       dataKey="close"
+                      connectNulls={true}
                       stroke={up ? '#2ecc40' : '#db2828'}
                       fill={up ? '#2ecc408a' : '#db28288a'}
                     />
-                  </AreaChart>
+                    <Bar dataKey="volume" yAxisId="right" barSize={5} fill="#1b1c1d36" />
+                  </ComposedChart>
                 </ResponsiveContainer>
               </Segment>
             </Grid.Column>
