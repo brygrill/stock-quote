@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Media from 'react-media';
-import { Grid, Segment, List } from 'semantic-ui-react';
+import _ from 'lodash';
+import { Grid, Segment, List, Icon, Header } from 'semantic-ui-react';
 import {
   ResponsiveContainer,
-  AreaChart,
   Area,
   XAxis,
   YAxis,
@@ -37,7 +37,6 @@ const CustomTooltip = ({ chart, label, active }) => {
 const Chart = ({ charts, display }) => {
   const [activeChart, setActiveChart] = useState('d1');
   const { up, perc } = chartUpDown(activeChart, charts[activeChart]);
-  console.log(charts[activeChart]);
   return (
     <Media
       query="(min-width: 768px)"
@@ -52,53 +51,70 @@ const Chart = ({ charts, display }) => {
                 onClick={setActiveChart}
               />
               <Segment attached>
-              
-                <ResponsiveContainer height={300}>
-                  <ComposedChart data={charts[activeChart]}>
-                    <Tooltip
-                      content={<CustomTooltip chart={charts[activeChart]} />}
-                    />
-                    {activeChart === 'd1' ? (
-                      <XAxis
-                        tick={false}
-                        hide
-                        type="number"
-                        dataKey="index"
-                        domain={['dataMin', 390]}
+                {!_.isEmpty(charts[activeChart]) ? (
+                  <ResponsiveContainer height={300}>
+                    <ComposedChart data={charts[activeChart]}>
+                      <Tooltip
+                        content={<CustomTooltip chart={charts[activeChart]} />}
                       />
-                    ) : (
-                      <XAxis tick={false} hide />
-                    )}
-                    <YAxis
-                      hide
-                      dataKey="close"
-                      yAxisId="left"
-                      tick={false}
-                      type="number"
-                      tickFormatter={t => numRounded(t)}
-                      interval={2}
-                      domain={[dataMin => dataMin - dataMin * 0.005, 'dataMax']}
-                    />
-                    <YAxis
-                      hide
-                      dataKey="volume"
-                      yAxisId="right"
-                      tick={false}
-                      type="number"
-                      padding={{top: 200 }}
-                      domain={['dataMin', 'dataMax']}
-                    />
-                    <Area
-                      type="monotone"
-                      yAxisId="left"
-                      dataKey="close"
-                      connectNulls={true}
-                      stroke={up ? '#2ecc40' : '#db2828'}
-                      fill={up ? '#2ecc408a' : '#db28288a'}
-                    />
-                    <Bar dataKey="volume" yAxisId="right" barSize={5} fill="#1b1c1d36" />
-                  </ComposedChart>
-                </ResponsiveContainer>
+                      {activeChart === 'd1' ? (
+                        <XAxis
+                          tick={false}
+                          hide
+                          type="number"
+                          dataKey="index"
+                          domain={['dataMin', 390]}
+                        />
+                      ) : (
+                        <XAxis tick={false} hide />
+                      )}
+                      <YAxis
+                        hide
+                        dataKey="close"
+                        yAxisId="left"
+                        tick={false}
+                        type="number"
+                        tickFormatter={t => numRounded(t)}
+                        interval={2}
+                        domain={[
+                          dataMin => dataMin - dataMin * 0.005,
+                          'dataMax',
+                        ]}
+                      />
+                      <YAxis
+                        hide
+                        dataKey="volume"
+                        yAxisId="right"
+                        tick={false}
+                        type="number"
+                        padding={{ top: 200 }}
+                        domain={[dataMin => dataMin - dataMin * 0.2, 'dataMax']}
+                      />
+                      <Area
+                        type="monotone"
+                        yAxisId="left"
+                        dataKey="close"
+                        connectNulls={true}
+                        stroke={up ? '#2ecc40' : '#db2828'}
+                        fill={up ? '#2ecc408a' : '#db28288a'}
+                      />
+                      <Bar
+                        dataKey="volume"
+                        yAxisId="right"
+                        barSize={5}
+                        fill="#1b1c1d36"
+                      />
+                    </ComposedChart>
+                  </ResponsiveContainer>
+                ) : (
+                  <Segment placeholder>
+                    {' '}
+                    <Header icon>
+                      <Icon name="time" />
+                      Market Not Open
+                    </Header>
+                  </Segment>
+                )}
               </Segment>
             </Grid.Column>
           </Grid.Row>
