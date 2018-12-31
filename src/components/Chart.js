@@ -36,7 +36,7 @@ const CustomTooltip = ({ chart, label, active }) => {
 
 const Chart = ({ charts, display }) => {
   const [activeChart, setActiveChart] = useState('d1');
-  const { up, perc } = chartUpDown(activeChart, charts[activeChart]);
+  const { up, perc } = chartUpDown(activeChart, charts[activeChart], display);
   return (
     <Media
       query="(min-width: 768px)"
@@ -46,8 +46,8 @@ const Chart = ({ charts, display }) => {
             <Grid.Column>
               <ChartMenu
                 active={activeChart}
-                perc={activeChart === 'd1' ? display.changePercent : perc}
-                up={activeChart === 'd1' ? display.up : up}
+                perc={perc}
+                up={up}
                 onClick={setActiveChart}
               />
               <Segment attached>
