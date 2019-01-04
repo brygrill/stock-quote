@@ -4,8 +4,9 @@ import { Grid, Segment, Header, Image } from 'semantic-ui-react';
 
 import StatsPrice from './StatsPrice';
 import StatsDetails from './StatsDetails';
-import NewsItems from './NewsItems';
 import Chart from './Chart';
+import NewsItems from './NewsItems';
+
 import NotFound from './NotFound';
 
 import { quoteFormatting } from '../utils/format';
@@ -50,7 +51,7 @@ const QuoteData = props => {
         <Segment basic>
           <Grid stackable divided>
             <StatsDetails data={display} />
-            <Chart charts={props.charts} display={display}/>
+            <Chart charts={props.charts} display={display} />
             <NewsItems news={news} />
           </Grid>
         </Segment>
