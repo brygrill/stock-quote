@@ -1,15 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { Grid, List, Popup } from 'semantic-ui-react';
-import Disclaimer from './Disclaimer';
-
-const DisclaimerWrap = styled.div`
-  float: right;
-  font-size: 0.8rem;
-  margin-top: -1rem;
-  color: #a7a2a2;
-`;
+import { Grid, List } from 'semantic-ui-react';
+import { DisclaimerPop } from './Disclaimer';
 
 const Item = ({ title, value }) => {
   return (
@@ -57,11 +49,7 @@ const StatsDetails = ({ data }) => {
       </Grid.Row>
       <Grid.Row style={{ padding: 0 }}>
         <Grid.Column floated="right" width={16}>
-          <Popup
-            on="click"
-            trigger={<DisclaimerWrap>Disclaimer</DisclaimerWrap>}
-            content={<Disclaimer session={false} />}
-          />
+          <DisclaimerPop session={false} />
         </Grid.Column>
       </Grid.Row>
     </React.Fragment>
