@@ -38,9 +38,8 @@ const Chart = ({ charts, display }) => {
   const [activeChart, setActiveChart] = useState('d1');
   const { up, perc } = chartUpDown(activeChart, charts[activeChart], display);
   return (
-    <Media
-      query="(min-width: 768px)"
-      render={() => (
+    <Media query="(min-width: 768px)">
+      {matches => (
         <React.Fragment>
           <Grid.Row>
             <Grid.Column>
@@ -120,7 +119,7 @@ const Chart = ({ charts, display }) => {
           </Grid.Row>
         </React.Fragment>
       )}
-    />
+    </Media>
   );
 };
 
