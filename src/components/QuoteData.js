@@ -49,7 +49,7 @@ const QuoteData = props => {
           color={display.status}
         />
         <Segment basic>
-          <Grid stackable divided>
+          <Grid stackable>
             <StatsDetails data={display} />
             <Chart charts={props.charts} display={display} />
             <NewsItems news={news} />
