@@ -6,8 +6,6 @@ Search for and get real-time quotes.
 - Data provided for free by [IEX](https://iextrading.com/developer/)
 
 TODO:
-- disclaimer
-- chart mobile
 - front page movers
 - crypto
 - filters
