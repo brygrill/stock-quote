@@ -1,9 +1,17 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import _ from 'lodash';
 import { connectAutoComplete } from 'react-instantsearch-dom';
 import { withRouter } from 'react-router-dom';
-import { Search } from 'semantic-ui-react';
+import { Search, Image } from 'semantic-ui-react';
+
+import algolia from '../assets/algolia-mark-blue.png';
+
+const SearchWrap = styled.div`
+  display: flex;
+  align-items: center;
+`
 
 const formatHits = hits => {
   return _.chain(hits)
@@ -30,16 +38,20 @@ const SearchInput = props => {
   };
 
   return (
-    <Search
-      fluid
-      input={{ style: { width: '90%' } }}
-      size="small"
-      placeholder="Enter Company or Symbol"
-      value={val}
-      onSearchChange={onChange}
-      onResultSelect={onSelect}
-      results={formatHits(props.hits)}
-    />
+    <SearchWrap>
+      <Search
+      style={{width: '90%'}}
+        fluid
+        input={{ style: { width: '90%' } }}
+        size="small"
+        placeholder="Enter Company or Symbol"
+        value={val}
+        onSearchChange={onChange}
+        onResultSelect={onSelect}
+        results={formatHits(props.hits)}
+      />
+      <Image src={algolia} size="mini" title="Search by Algolia" />
+    </SearchWrap>
   );
 };
 

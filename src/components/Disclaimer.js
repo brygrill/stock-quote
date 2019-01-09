@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Popup, Button, Icon } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 const DisclaimerWrap = styled.div`
@@ -14,7 +15,7 @@ const DisclaimerWrap = styled.div`
     color: #808080;
     text-decoration: underline;
   }
-`
+`;
 
 const Disclaimer = ({ session }) => {
   return (
@@ -40,4 +41,24 @@ Disclaimer.propTypes = {
   session: PropTypes.bool.isRequired,
 };
 
+export const DisclaimerPop = ({ session }) => {
+  return (
+    <Popup
+      on="click"
+      trigger={
+        <Button
+          basic
+          compact
+          floated="right"
+          size="tiny"
+          icon
+          style={{ fontSize: '0.6rem', marginTop: '-0.5rem' }}
+        >
+          <Icon name="info circle" /> Disclaimer
+        </Button>
+      }
+      content={<Disclaimer session={false} />}
+    />
+  );
+};
 export default Disclaimer;

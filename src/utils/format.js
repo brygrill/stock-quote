@@ -51,12 +51,14 @@ export const upper = symbol => {
   return _.toUpper(symbol);
 };
 
-export const chartUpDown = (range, data) => {
+export const chartUpDown = (range, data, display) => {
   if (range === 'd1') {
-    const last = _.last(data).marketChangeOverTime;
-    return { up: last >= 0, perc: percent(last) };
+    // const last = _.has(_.last(data), 'marketChangeOverTime')
+    //   ? _.last(data).marketChangeOverTime
+    //   : 0;
+    return { up: display.up , perc: display.changePercent };
   }
-  const last = _.last(data).changeOverTime;
+  const last = _.has(_.last(data), 'changeOverTime') ? _.last(data).changeOverTime : 0;
   return { up: last >= 0, perc: percent(last) };
 };
 

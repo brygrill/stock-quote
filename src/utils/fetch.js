@@ -8,7 +8,9 @@ const iex = axios.create({
 
 export const fetchChart = async (symbol, range) => {
   const { data } = await iex.get(`/${symbol}/chart/${range}`, {
-    params: {},
+    params: {
+      chartReset: true,
+    },
   });
   return data;
 };
