@@ -16,9 +16,9 @@ const HomePage = () => {
       {!fetchingIncidies.loading && (
         <React.Fragment>
           <Grid>
-            <Grid.Row columns={4}>
+            <Grid.Row columns="equal" centered>
               {_.map(lists, l => {
-                return (
+                return _.isEmpty(indiciesData[l]) ? null : (
                   <Grid.Column key={l}>
                     <ListItems items={indiciesData[l]} />
                   </Grid.Column>
