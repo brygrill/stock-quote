@@ -67,8 +67,8 @@ export const fetchMarketNews = async () => {
   return data;
 };
 
-export const fetchInFocus = async () => {
-  const { data } = await iex.get(`/market/list/infocus`);
+export const fetchList = async endpoint => {
+  const { data } = await iex.get(`/market/list/${endpoint}`);
   return data;
 };
 
@@ -76,8 +76,18 @@ export const fetchIndiciesData = async symbols => {
   const data = await Promise.all([
     await fetchBatchData(_.toString(symbols)),
     await fetchMarketNews(),
-    await fetchInFocus(),
+    await fetchList('mostactive'),
+    await fetchList('gainers'),
+    await fetchList('losers'),
+    await fetchList('infocus'),
   ]);
 
-  return { quotes: data[0], news: data[1], infocus: data[2] };
+  return {
+    quotes: data[0],
+    news: data[1],
+    mostactive: data[2],
+    gainers: data[3],
+    losers: data[4],
+    infocus: data[5],
+  };
 };

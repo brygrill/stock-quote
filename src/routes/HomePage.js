@@ -6,6 +6,7 @@ import setTitle from '../utils/title';
 
 const HomePage = props => {
   const context = useContext(DataContext);
+  console.log(context.indiciesData)
   setTitle(null, null)
   return (
     <Segment style={{ minHeight: '300px' }}>
