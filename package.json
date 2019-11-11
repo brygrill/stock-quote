@@ -1,41 +1,54 @@
 {
-  "name": "stock-quote",
-  "version": "2.0.0",
-  "private": false,
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
+  "name": "sidebar",
+  "version": "0.0.1",
+  "private": true,
   "devDependencies": {
-    "react-scripts": "3.0.1"
+    "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.12",
+    "@types/react": "^16.9.5",
+    "@types/react-dom": "^16.9.1",
+    "@types/react-router": "^5.1.1",
+    "@types/react-router-dom": "^5.1.0",
+    "@typescript-eslint/eslint-plugin": "^2.6.0",
+    "@typescript-eslint/parser": "^2.6.0",
+    "eslint": "^6.0.0",
+    "eslint-config-blvd": "^0.1.1",
+    "eslint-config-prettier": "^5.0.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "prettier": "^1.18.2",
+    "react-scripts": "3.2.0",
+    "typescript": "3.6.3"
   },
   "dependencies": {
-    "axios": "^0.19.0",
-    "lodash": "^4.17.14",
-    "moment": "^2.23.0",
-    "numeral": "^2.0.6",
-    "prop-types": "^15.6.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-helmet": "^5.2.0",
-    "react-instantsearch-dom": "^5.3.2",
-    "react-media": "^1.8.0",
-    "react-router-dom": "^4.3.1",
-    "recharts": "^1.4.2",
-    "semantic-ui-react": "^0.83.0",
-    "socket.io-client": "^2.2.0",
-    "styled-components": "^4.1.2"
+    "@ionic/react": "^4.11.0",
+    "@ionic/react-router": "^4.11.0",
+    "ionicons": "^4.6.3",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "react-router": "^5.1.0",
+    "react-router-dom": "^5.1.0"
   },
   "scripts": {
+    "serve": "ionic serve",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "deploy": "yarn build && firebase deploy --only hosting"
-  }
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "description": "An Ionic project"
 }
