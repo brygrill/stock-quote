@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Flex, Box } from 'rebass';
 
 import Nav from './Nav';
-import Social from './Social';
 
 const navItems = [
   { title: 'HOME', href: '/' },
@@ -23,9 +22,6 @@ const Menu = () => {
       <Box sx={{ justifyContent: 'flex-start' }}>
         <Nav items={navItems} />
       </Box>
-      {/* <Box sx={{ justifyContent: 'flex-end' }}>
-        <Social />
-      </Box> */}
     </Flex>
   );
 };

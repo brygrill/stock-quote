@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import GraphiQL from 'graphiql';
+import QueryGQL from 'graphiql';
 import fetch from 'isomorphic-fetch';
 import { Box } from 'rebass';
 import 'graphiql/graphiql.css';
@@ -21,7 +21,7 @@ function graphQLFetcher(graphQLParams) {
   ).then(response => response.json());
 }
 
-const GraphiQLUI = () => {
+const Query = () => {
   return (
     <Layout maxWidth={2000}>
       <Box
@@ -29,10 +29,10 @@ const GraphiQLUI = () => {
           height: '30rem',
         }}
       >
-        <GraphiQL fetcher={graphQLFetcher} style={{ minHeight: '30rem' }} />
+        <QueryGQL fetcher={graphQLFetcher} style={{ minHeight: '30rem' }} />
       </Box>
     </Layout>
   );
 };
 
-export default GraphiQLUI;
+export default Query;

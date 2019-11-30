@@ -1,7 +1,5 @@
 import * as React from 'react';
-import { Box, Heading, Image } from 'rebass';
-
-import undraw from '../images/undraw_progressive_app.svg';
+import { Box, Heading } from 'rebass';
 
 const Header = () => {
   return (
@@ -32,9 +30,6 @@ const Header = () => {
         >
           Gatsby Starter TypeScript Rebass
         </Heading>
-      </Box>
-      <Box sx={{ p: 3 }}>
-        <Image src={undraw} />
       </Box>
     </Box>
   );

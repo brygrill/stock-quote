@@ -3,7 +3,6 @@ import Helmet from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
 import { Box } from 'rebass';
 
-import 'prismjs/themes/prism-tomorrow.css';
 import '../styles/index.css';
 
 import Menu from '../components/Menu';
