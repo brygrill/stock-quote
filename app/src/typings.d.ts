@@ -15,6 +15,7 @@ declare module '*.module.css' {
 }
 
 declare module '@rebass/preset';
+declare module 'graphiql';
 
 declare module '*.svg' {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

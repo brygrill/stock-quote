@@ -6,8 +6,7 @@ import Social from './Social';
 
 const navItems = [
   { title: 'HOME', href: '/' },
-  { title: 'PAGE', href: '/first-page' },
-  { title: 'POST', href: '/blog/my-first-post' },
+  { title: 'QUERY', href: '/query' },
 ];
 
 const Menu = () => {
@@ -24,9 +23,9 @@ const Menu = () => {
       <Box sx={{ justifyContent: 'flex-start' }}>
         <Nav items={navItems} />
       </Box>
-      <Box sx={{ justifyContent: 'flex-end' }}>
+      {/* <Box sx={{ justifyContent: 'flex-end' }}>
         <Social />
-      </Box>
+      </Box> */}
     </Flex>
   );
 };
