@@ -1,0 +1,17 @@
+{
+  "name": "mvgcju5-o6oueb",
+  "hash": "YQIEKv/z+SitnmqUT3HvmKCZL2OJzqCf5gur7k4vB9Q=",
+  "description": "AWS Lambda Component",
+  "memory": 512,
+  "timeout": 10,
+  "code": "./",
+  "shims": [],
+  "handler": "index.handler",
+  "runtime": "nodejs10.x",
+  "env": {},
+  "role": {
+    "arn": "arn:aws:iam::285342408571:role/mvgcju5-9zd413m"
+  },
+  "arn": "arn:aws:lambda:us-east-1:285342408571:function:mvgcju5-o6oueb",
+  "region": "us-east-1"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "mvgcju5-9zd413m",
+  "arn": "arn:aws:iam::285342408571:role/mvgcju5-9zd413m",
+  "service": "lambda.amazonaws.com",
+  "policy": {
+    "arn": "arn:aws:iam::aws:policy/AdministratorAccess"
+  },
+  "region": "us-east-1"
+}

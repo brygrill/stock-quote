@@ -1,0 +1,29 @@
+{
+  "arn": "arn:aws:appsync:us-east-1:285342408571:apis/fyproch4mnfw5devb6ypcqcnpe",
+  "schemaChecksum": "3305772f6e00d234c60589033a0169749ae029ddcc6c70c75e1c665b72815641",
+  "apiKeys": [
+    {
+      "name": "publicKey",
+      "id": "da2-4kczkhvhnrgdxjjpp5nab53eda"
+    }
+  ],
+  "uris": {
+    "REALTIME": "wss://fxsmbnrmrne23ogbuwtl2hsigq.appsync-realtime-api.us-east-1.amazonaws.com/graphql",
+    "GRAPHQL": "https://fxsmbnrmrne23ogbuwtl2hsigq.appsync-api.us-east-1.amazonaws.com/graphql"
+  },
+  "apiId": "fyproch4mnfw5devb6ypcqcnpe",
+  "isApiCreator": true,
+  "dataSources": [
+    {
+      "name": "getPost",
+      "type": "AWS_LAMBDA"
+    }
+  ],
+  "mappingTemplates": [
+    {
+      "type": "Query",
+      "field": "getPost"
+    }
+  ],
+  "functions": []
+}
