@@ -1,6 +1,0 @@
-{
-  "components": {
-    "Resolver": "/Users/Bryan/.serverless/components/registry/npm/@serverless/aws-lambda@3.0.0/node_modules/@serverless/aws-lambda",
-    "GraphQL": "/Users/Bryan/.serverless/components/registry/npm/@serverless/aws-app-sync@1.2.0/node_modules/@serverless/aws-app-sync"
-  }
-}
