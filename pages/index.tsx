@@ -1,11 +1,14 @@
 import React from 'react';
+import Link from 'next/link';
 
 import Wrapper from '../components/Wrapper';
 
 const home = () => {
   return (
     <Wrapper title="Home">
-      hi
+      <Link href="/aapl">
+        <a>AAPL</a>
+      </Link>
     </Wrapper>
   );
 };
