@@ -17,7 +17,7 @@ const useStyles = makeStyles(() =>
 const Footer = () => {
   const classes = useStyles();
   return (
-    <AppBar position="fixed" color="primary" className={classes.appBar}>
+    <AppBar position="fixed" color="secondary" className={classes.appBar}>
       <Typography>Footer</Typography>
     </AppBar>
   );
