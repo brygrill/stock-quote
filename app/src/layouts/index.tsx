@@ -1,17 +1,33 @@
 import React, { ReactElement } from 'react';
-import { CssBaseline } from '@material-ui/core';
+import {
+  CssBaseline,
+  Container,
+  makeStyles,
+  createStyles,
+} from '@material-ui/core';
+import Nav from '../components/Nav';
+import Footer from '../components/Footer';
 
-const index = ({ children }: { children: ReactElement }) => {
+const useStyles = makeStyles(() =>
+  createStyles({
+    container: {
+      padding: '5rem 2rem'
+    },
+  }),
+);
+
+const Layout = ({ children }: { children: ReactElement }) => {
+  const classes = useStyles();
   return (
     <>
       <CssBaseline />
-      <div>
-        <div>nav</div>
+      <Nav />
+      <Container className={classes.container}>
         <main>{children}</main>
-        <div>footer</div>
-      </div>
+      </Container>
+      <Footer />
     </>
   );
 };
 
-export default index;
+export default Layout;
