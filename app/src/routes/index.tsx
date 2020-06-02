@@ -1,22 +1,12 @@
 import React from 'react';
-import { Outlet, useRoutes, useParams } from 'react-router-dom';
+import { Outlet, useRoutes } from 'react-router-dom';
 
 import Quote from './Quote';
 
 // https://github.com/ReactTraining/react-router/blob/dev/docs/advanced-guides/migrating-5-to-6.md
 // https://reacttraining.com/blog/react-router-v6-pre/#introducing-routes
 const Home = () => <div>Home</div>;
-function Quotes() {
-  return (
-    <div>
-      <Outlet />
-    </div>
-  );
-}
-const QuoteProfile = () => {
-  const { symbol } = useParams();
-  return <div>Quote for {symbol}</div>;
-};
+const Quotes = () => <Outlet />;
 
 const Router = () => {
   const element = useRoutes([

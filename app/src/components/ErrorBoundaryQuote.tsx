@@ -14,15 +14,22 @@ class ErrorBoundary extends Component<IProps, IState> {
   };
 
   public componentDidCatch(error: Error) {
-    console.log(error)
+    console.log(error);
     // show error message
     // let error bubble up to sentry init
     this.setState({ error });
   }
 
+  tryAgain = () => this.setState({ error: null });
+
   public render() {
     if (this.state.error) {
-      return <div>Error Message</div>;
+      return (
+        <div>
+          Error fetching quote!{' '}
+          <button onClick={this.tryAgain}>Try again</button>
+        </div>
+      );
     }
     return this.props.children;
   }

@@ -1,21 +1,21 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useQuery } from 'react-query';
+import { Box } from '@material-ui/core';
 
-const fetchQuote = () => {
-  return fetch(
-    `https://sandbox.iexapis.com/stable/stock/AAPL/quote?token=${process.env.REACT_APP_IEX}`,
-  ).then((response) => response.json());
-};
+import ErrorBoundaryQuote from '../components/ErrorBoundaryQuote';
+import QueryQuote from '../components/QueryQuote';
 
 const Quote = () => {
   const { symbol } = useParams();
-  const { data } = useQuery('todos', fetchQuote);
-  console.log(data);
   return (
-    <React.Suspense fallback={<div>loading...</div>}>
-      <div>Quote for {symbol}</div>
-    </React.Suspense>
+    <Box>
+      <ErrorBoundaryQuote>
+        <React.Suspense fallback={<div>loading...</div>}>
+          <div>Quote Here</div>
+          <QueryQuote symbol={symbol} />
+        </React.Suspense>
+      </ErrorBoundaryQuote>
+    </Box>
   );
 };
 

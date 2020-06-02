@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  AppBar,
-  Typography,
-  makeStyles,
-  createStyles,
-} from '@material-ui/core';
+import { AppBar, Typography } from '@material-ui/core';
 
 const Nav = () => {
   return (
