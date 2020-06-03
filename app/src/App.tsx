@@ -5,10 +5,12 @@ import Layout from './layouts';
 import Router from './routes';
 
 const App = () => (
-  <ErrorBoundary>
+  <ErrorBoundary render={() => <div>The entire app broke!</div>}>
     <BrowserRouter>
       <Layout>
-        <Router />
+        <React.Suspense fallback={<div>Loading app routes...</div>}>
+          <Router />
+        </React.Suspense>
       </Layout>
     </BrowserRouter>
   </ErrorBoundary>

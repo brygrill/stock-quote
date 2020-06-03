@@ -1,6 +1,8 @@
 import React, { Component, ReactElement } from 'react';
 
 interface IProps {
+  reset?: boolean;
+  render: Function;
   children: ReactElement;
 }
 
@@ -14,15 +16,19 @@ class ErrorBoundary extends Component<IProps, IState> {
   };
 
   public componentDidCatch(error: Error) {
-    console.log(error)
-    // show error message
-    // let error bubble up to sentry init
+    console.log(error);
     this.setState({ error });
+  }
+
+  public componentDidUpdate(prevProps: IProps) {
+    if (this.props.reset !== prevProps.reset && this.props.reset) {
+      this.setState({ error: null });
+    }
   }
 
   public render() {
     if (this.state.error) {
-      return <div>Error Message</div>;
+      return <div>{this.props.render()}</div>;
     }
     return this.props.children;
   }
