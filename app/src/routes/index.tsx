@@ -1,9 +1,8 @@
-import React, { lazy } from 'react';
+import React from 'react';
 import { Outlet, useRoutes } from 'react-router-dom';
 
 import HomePage from './Home';
-// import Quote from './Quote';
-const Quote = lazy(() => import("./Quote"));
+import Quote from './Quote';
 
 // https://github.com/ReactTraining/react-router/blob/dev/docs/advanced-guides/migrating-5-to-6.md
 // https://reacttraining.com/blog/react-router-v6-pre/#introducing-routes

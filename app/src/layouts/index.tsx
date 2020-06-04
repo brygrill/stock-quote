@@ -10,7 +10,8 @@ import {
 import theme from './theme';
 
 import Nav from '../components/Nav';
-import Footer from '../components/Footer';
+
+const LazyFooter = React.lazy(() => import('../components/Footer'));
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -31,7 +32,7 @@ const Layout = ({ children }: { children: ReactElement }) => {
         <Container className={classes.container}>
           <main>{children}</main>
         </Container>
-        <Footer />
+        <LazyFooter />
       </ThemeProvider>
     </>
   );

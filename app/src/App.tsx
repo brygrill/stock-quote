@@ -7,11 +7,13 @@ import Router from './routes';
 const App = () => (
   <ErrorBoundary render={() => <div>The entire app broke!</div>}>
     <BrowserRouter>
-      <Layout>
-        <React.Suspense fallback={<div>Loading app routes...</div>}>
-          <Router />
-        </React.Suspense>
-      </Layout>
+      <React.Suspense fallback={<div/>}>
+        <Layout>
+          <React.Suspense fallback={<div>Loading app routes...</div>}>
+            <Router />
+          </React.Suspense>
+        </Layout>
+      </React.Suspense>
     </BrowserRouter>
   </ErrorBoundary>
 );
