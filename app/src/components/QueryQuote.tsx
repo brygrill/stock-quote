@@ -12,6 +12,7 @@ const fetchQuote = async (key: string, { symbol }: { symbol: string }) => {
 const Quote = ({ symbol }: { symbol: string }) => {
   const { data } = useQuery(['quote', { symbol }], fetchQuote, {
     suspense: true,
+    refetchInterval: 5000,
   });
   console.log(data);
   return <div>{symbol}</div>;
