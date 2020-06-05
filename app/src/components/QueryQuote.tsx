@@ -1,13 +1,11 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import axios from 'axios';
-
-const endpoint = (symbol: string) =>
-  `https://sandbox.iexapis.com/stable/stock/${symbol}/quote?token=${process.env.REACT_APP_IEX}`;
+import { iex } from '../config';
 
 const fetchQuote = async (key: string, { symbol }: { symbol: string }) => {
-  console.log(symbol);
-  const { data } = await axios.get(endpoint(symbol));
+  const url = iex.quote(symbol);
+  const { data } = await axios.get(url);
   return data;
 };
 
