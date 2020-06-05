@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.10.0",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.55",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
@@ -16,6 +17,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-query": "^1.5.3",
+    "react-query-devtools": "^1.1.17",
     "react-router": "^6.0.0-alpha.5",
     "react-router-dom": "^6.0.0-alpha.5",
     "react-scripts": "3.4.1",
