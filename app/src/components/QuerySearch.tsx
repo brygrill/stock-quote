@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { TextField, CircularProgress } from '@material-ui/core';
@@ -20,7 +21,7 @@ const fetchSearch = async (
 
 const QuerySearch = () => {
   // state
-  const [value, setValue] = React.useState<string | null>(null);
+  const [value] = React.useState<string | null>(null);
   const [inputValue, setInputValue] = React.useState<string | undefined>('');
   const [options, setOptions] = React.useState<string[]>([]);
 
@@ -38,11 +39,12 @@ const QuerySearch = () => {
 
   // select from autocomplete options
   const handleValueSelect = (event: any, newInputValue: string | null) => {
-    console.log('route to new page');
-    console.log(newInputValue);
+    // route to quote page
     navigateTo(`/quote/${newInputValue}`);
 
-    setValue(newInputValue);
+    // clear inputs
+    setInputValue('');
+    setOptions([]);
   };
 
   React.useEffect(() => {
