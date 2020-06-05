@@ -10,6 +10,7 @@ import {
 import theme from './theme';
 
 import Nav from '../components/Nav';
+import SearchHeader from '../components/SearchHeader';
 
 const LazyFooter = React.lazy(() => import('../components/Footer'));
 
@@ -25,12 +26,14 @@ const Layout = ({ children }: { children: ReactElement }) => {
   const classes = useStyles();
   return (
     <>
-      
       <ThemeProvider theme={theme}>
-      <CssBaseline />
+        <CssBaseline />
         <Nav />
         <Container className={classes.container}>
-          <main>{children}</main>
+          <main>
+            <SearchHeader />
+            {children}
+          </main>
         </Container>
         <LazyFooter />
       </ThemeProvider>
