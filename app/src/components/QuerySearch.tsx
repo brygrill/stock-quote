@@ -13,29 +13,38 @@ const fetchSearch = async (
   if (fragment) {
     const url = iex.search(fragment);
     const { data } = await axios.get(url);
-    console.log(data);
     return data;
   }
 };
 
-const options = ['one', 'two', 'three'];
 const QuerySearch = () => {
   const [value, setValue] = React.useState<string | null>(null);
   const [inputValue, setInputValue] = React.useState<string | undefined>('');
-  const info = useQuery(['search', { fragment: inputValue }], fetchSearch);
-  console.log(info);
+  const [options, setOptions] = React.useState<string[]>([]);
+
+  const { status, error, data } = useQuery(
+    ['search', { fragment: inputValue }],
+    fetchSearch,
+  );
 
   // reflects change in chars entered
   const handleValueChange = (event: any, newValue: string | undefined) => {
-    console.log('fetch iex data');
     setInputValue(newValue);
   };
 
   // select from autocomplete options
   const handleValueSelect = (event: any, newInputValue: string | null) => {
     console.log('route to new page');
+    console.log(newInputValue)
     setValue(newInputValue);
   };
+
+  React.useEffect(() => {
+    if (data) {
+      const d = data.map((option: { symbol: string }) => option.symbol);
+      setOptions(d)
+    }
+  }, [data]);
 
   return (
     <div>
@@ -46,6 +55,7 @@ const QuerySearch = () => {
         inputValue={inputValue}
         onInputChange={handleValueChange}
         options={options}
+        filterOptions={(options) => options}
         renderInput={(params) => (
           <TextField
             {...params}
