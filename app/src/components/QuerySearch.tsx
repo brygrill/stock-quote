@@ -63,7 +63,7 @@ const QuerySearch = () => {
   return (
     <div>
       <Autocomplete
-        loading={isFetching}
+        // loading={isFetching}
         freeSolo
         value={value}
         onChange={handleValueSelect}
