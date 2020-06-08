@@ -6,6 +6,8 @@ import { useQuery } from 'react-query';
 import { TextField, CircularProgress } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 
+import Section from './Section';
+
 import { iex } from '../config';
 
 const fetchSearch = async (
@@ -61,7 +63,7 @@ const QuerySearch = () => {
   }, [error]);
 
   return (
-    <div>
+    <Section>
       <Autocomplete
         // loading={isFetching}
         freeSolo
@@ -91,7 +93,7 @@ const QuerySearch = () => {
           />
         )}
       />
-    </div>
+    </Section>
   );
 };
 

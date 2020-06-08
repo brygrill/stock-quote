@@ -21,7 +21,7 @@ const useStyles = makeStyles(() =>
 const Footer = () => {
   const classes = useStyles();
   return (
-    <AppBar position="fixed" color="transparent" className={classes.appBar}>
+    <AppBar position="fixed" color="primary" className={classes.appBar}>
       <Typography variant="subtitle1" className={classes.title}>
         <Link
           href="https://iexcloud.io"
