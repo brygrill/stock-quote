@@ -1,5 +1,7 @@
 const SANDBOX = true;
 
+export const breakpoint = '(min-width:600px)';
+
 const apiBase = SANDBOX
   ? 'https://sandbox.iexapis.com/stable'
   : 'https://cloud.iexapis.com/stable';

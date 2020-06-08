@@ -17,7 +17,7 @@ const LazyFooter = React.lazy(() => import('../components/Footer'));
 const useStyles = makeStyles(() =>
   createStyles({
     container: {
-      padding: '5rem 2rem',
+      padding: '4rem 1rem',
     },
   }),
 );
@@ -29,7 +29,7 @@ const Layout = ({ children }: { children: ReactElement }) => {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Nav />
-        <Container className={classes.container}>
+        <Container className={classes.container} maxWidth="sm">
           <main>
             <SearchHeader />
             {children}
