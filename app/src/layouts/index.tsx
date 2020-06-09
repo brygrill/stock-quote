@@ -10,7 +10,6 @@ import {
 import theme from './theme';
 
 import Nav from '../components/Nav';
-import SearchHeader from '../components/SearchHeader';
 
 const LazyFooter = React.lazy(() => import('../components/Footer'));
 
@@ -30,10 +29,7 @@ const Layout = ({ children }: { children: ReactElement }) => {
         <CssBaseline />
         <Nav />
         <Container className={classes.container} maxWidth="sm">
-          <main>
-            <SearchHeader />
-            {children}
-          </main>
+          <main>{children}</main>
         </Container>
         <LazyFooter />
       </ThemeProvider>
